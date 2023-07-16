@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0052: Rimuovi i membri privati non letti
+dotnet_diagnostic.IDE0052.severity = none
