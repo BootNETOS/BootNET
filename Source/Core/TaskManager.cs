@@ -7,7 +7,7 @@ namespace BootNet.Core
         public static List<Task> TaskList { get; set; } = new();
         public static void RegisterProcess(Task task)
         {
-            if(!TaskList.Contains(task))
+            if (!TaskList.Contains(task))
                 TaskList.Add(task);
         }
         public static void StopProcess(Task task)
@@ -40,11 +40,18 @@ namespace BootNet.Core
         }
         public static Task GetTask(uint processID)
         {
-            foreach(var task in TaskList)
+            foreach (var task in TaskList)
             {
                 if (task.ProcessID == processID) return task;
             }
             return null;
+        }
+        public static void Update()
+        {
+            foreach(var task in TaskList)
+            {
+                task.Update();
+            }
         }
     }
 }
