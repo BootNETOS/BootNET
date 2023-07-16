@@ -1,7 +1,9 @@
-﻿using Cosmos.Core.Memory;
+﻿using BootNet.GUI.UILib;
+using Cosmos.Core.Memory;
 using Cosmos.Core.Multiboot;
 using Cosmos.System;
 using Cosmos.System.Graphics;
+using Cosmos.System.Graphics.Fonts;
 using System.Drawing;
 
 namespace BootNet.GUI
@@ -32,6 +34,8 @@ namespace BootNet.GUI
                 0,0,0,0,0,0,0,1,1,0,0,0
         };
         readonly static Color purple = Color.FromArgb(255, 86, 50, 213);
+        public static Theme currentTheme;
+        static FilledButton button = new("TestFilledButton", 2, 2, "TestFilledButton".Length * 8, 20, new Dark(), ColorPriority.Secondary, PCScreenFont.Default);
         public static void Initialize()
         {
             if (VMTools.IsVMWare)
@@ -50,10 +54,13 @@ namespace BootNet.GUI
             MouseManager.ScreenHeight = Canvas.Mode.Height;
             MouseManager.X = MouseManager.ScreenWidth / 2;
             MouseManager.Y = MouseManager.ScreenHeight / 2;
+            ThemeManager.RegisterTheme(new Dark());
+            ThemeManager.SetTheme(new Dark());
         }
         public static void Update()
         {
             Canvas.Clear(purple);
+            button.Update();
             DrawCursor(Canvas, (int)MouseManager.X, (int)MouseManager.Y);
             Heap.Collect();
             Canvas.Display();

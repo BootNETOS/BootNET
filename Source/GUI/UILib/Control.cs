@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BootNet.GUI.UILib
+﻿namespace BootNet.GUI.UILib
 {
     public class Control
     {
@@ -26,7 +20,7 @@ namespace BootNet.GUI.UILib
         }
         public void Update()
         {
-            if(visible)
+            if (visible)
             {
                 Render();
             }
