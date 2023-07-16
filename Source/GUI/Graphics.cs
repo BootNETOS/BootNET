@@ -54,8 +54,7 @@ namespace BootNet.GUI
             MouseManager.ScreenHeight = Canvas.Mode.Height;
             MouseManager.X = MouseManager.ScreenWidth / 2;
             MouseManager.Y = MouseManager.ScreenHeight / 2;
-            ThemeManager.RegisterTheme(new Dark());
-            ThemeManager.SetTheme(new Dark());
+            currentTheme = new Dark();
         }
         public static void Update()
         {

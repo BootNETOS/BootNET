@@ -8,7 +8,6 @@ namespace BootNet.GUI.UILib
 {
     public class Taskbar : Control
     {
-        List<Button>
         public Taskbar(int x, int y,int width, int height, Theme theme, bool visible = true) : base(x, y, width, height, theme, visible)
         {
 

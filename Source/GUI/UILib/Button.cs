@@ -7,7 +7,7 @@ namespace BootNet.GUI.UILib
 {
     public class TextButton : Button
     {
-        public TextButton(string text, int x, int y, int width, int height, Theme theme, ColorPriority priority, PCScreenFont font, Action a = null, bool visible = true) : base(x, y, width, height, theme, visible)
+        public TextButton(string text, int x, int y, int width, int height, Theme theme, ColorPriority priority, PCScreenFont font, Action a = null, bool visible = true) : base(text, x, y, width, height, theme, priority, font, a, visible)
         {
 
         }
@@ -18,7 +18,7 @@ namespace BootNet.GUI.UILib
     }
     public class OutlinedButton : Button
     {
-        public OutlinedButton(string text, int x, int y, int width, int height, Theme theme, ColorPriority priority, PCScreenFont font, Action a = null, bool visible = true) : base(x, y, width, height, theme, visible)
+        public OutlinedButton(string text, int x, int y, int width, int height, Theme theme, ColorPriority priority, PCScreenFont font, Action a = null, bool visible = true) : base(text, x, y, width, height, theme, priority, font, a, visible)
         {
 
         }
@@ -30,7 +30,7 @@ namespace BootNet.GUI.UILib
     }
     public class FilledButton : Button
     {
-        public FilledButton(string text, int x, int y, int width, int height, Theme theme, ColorPriority priority, PCScreenFont font, Action a = null, bool visible = true) : base(x, y, width, height, theme, visible)
+        public FilledButton(string text, int x, int y, int width, int height, Theme theme, ColorPriority priority, PCScreenFont font, Action a = null, bool visible = true) : base(text, x, y, width, height, theme, priority, font, a, visible)
         {
 
         }
