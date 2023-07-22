@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BootNet.Core
+namespace BootNET.Core
 {
     public class Task
     {

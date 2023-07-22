@@ -22,6 +22,7 @@
 		<RemoveBootDebugOutput>True</RemoveBootDebugOutput>
 		<Timeout>5</Timeout>
 		<DebugEnabled>False</DebugEnabled>
+		<VMWareEdition>Player</VMWareEdition>
     </PropertyGroup>
 
     <ItemGroup>

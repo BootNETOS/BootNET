@@ -1,7 +1,6 @@
-﻿using BootNet.GUI;
-using Cosmos.System;
+﻿using Cosmos.System;
 
-namespace BootNet.Core
+namespace BootNET.Core
 {
     public class Program : Kernel
     {

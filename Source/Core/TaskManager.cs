@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BootNet.Core
+namespace BootNET.Core
 {
     public static class TaskManager
     {
@@ -35,7 +35,7 @@ namespace BootNet.Core
             }
             else
             {
-                throw new System.Exception("Process not registered!");
+                throw new System.Exception("Task not registered!");
             }
         }
         public static Task GetTask(uint processID)
@@ -48,7 +48,7 @@ namespace BootNet.Core
         }
         public static void Update()
         {
-            foreach(var task in TaskList)
+            foreach (var task in TaskList)
             {
                 task.Update();
             }
