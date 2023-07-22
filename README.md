@@ -1,2 +1,2 @@
 # BootNET
-BootNet Operating System, based on Cosmos
+BootNET Operating System, based on Cosmos
