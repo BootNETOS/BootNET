@@ -4,11 +4,15 @@ using BootNET.Network;
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using System;
+using System.IO;
 
 namespace BootNET.Core
 {
     public static class BootManager
     {
+        public static bool FilesystemEnabled;
+        public static bool Installed;
+
         /// <summary>
         /// Boot the system.
         /// </summary>
@@ -24,7 +28,6 @@ namespace BootNET.Core
             {
                 ErrorScreen("Error while initializing Console: " + ex.Message);
             }
-            Console.WriteLine("Connecting to Network...");
             try
             {
                 NetworkManager.Initialize(new(1, 1, 1, 1));
@@ -35,7 +38,6 @@ namespace BootNET.Core
                 Console.WriteLine("Network not connected: " + ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
             }
-            Console.WriteLine("Initializing sound...");
             try
             {
                 SoundManager.Initialize();
@@ -46,16 +48,35 @@ namespace BootNET.Core
                 Console.WriteLine("Sound disabled: " + ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
             }
-            Console.WriteLine("Initializing Filesystem...");
             try
             {
                 FilesystemManager.Initialize(true, true);
+                FilesystemEnabled = true;
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Filesystem is disabled: " + ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
+                FilesystemEnabled = false;
+            }
+            Console.WriteLine("Detecting BootNET...");
+            try
+            {
+                if (FilesystemEnabled && Directory.Exists("0:\\BootNET\\"))
+                {
+                    Console.Write(" Found on 0:\\");
+                    Installed = true;
+                }
+                else
+                {
+                    Console.Write(" Not found on 0:\\");
+                    Installed = false;
+                }
+            }
+            catch
+            {
+                Installed = false;
             }
         }
         /// <summary>

@@ -3,11 +3,15 @@ using System.Collections.Generic;
 
 namespace BootNET.Shell
 {
-
+    /// <summary>
+    /// Command manager with a good amount of terminal tools.
+    /// </summary>
     public class CommandManager
     {
-        private readonly List<Command> commands;
-
+        #region Constructors
+        /// <summary>
+        /// Initialize Command Manager.
+        /// </summary>
         public CommandManager()
         {
             this.commands = new()
@@ -15,7 +19,14 @@ namespace BootNET.Shell
                 new(""),
             };
         }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Process input from a string.
+        /// </summary>
+        /// <param name="input">Input string.</param>
+        /// <returns>Return the output of the command.</returns>
         public string ProcessInput(string input)
         {
             string[] split = input.Split(' ');
@@ -40,5 +51,10 @@ namespace BootNET.Shell
             Console.ForegroundColor = ConsoleColor.Red;
             return "Command \"" + label + "\" not found.";
         }
+        #endregion
+
+        #region Fields
+        public readonly List<Command> commands;
+        #endregion
     }
 }

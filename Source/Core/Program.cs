@@ -9,7 +9,7 @@ namespace BootNET.Core
         protected override void BeforeRun()
         {
             BootManager.Boot();
-            
+
         }
 
         protected override void Run()
