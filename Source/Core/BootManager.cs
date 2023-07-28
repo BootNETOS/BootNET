@@ -1,9 +1,9 @@
-﻿using Cosmos.System.Graphics;
-using System;
-using Cosmos.System.Graphics.Fonts;
-using BootNET.Network;
+﻿using BootNET.Audio;
 using BootNET.Filesystem;
-using BootNET.Audio;
+using BootNET.Network;
+using Cosmos.System.Graphics;
+using Cosmos.System.Graphics.Fonts;
+using System;
 
 namespace BootNET.Core
 {
@@ -19,7 +19,7 @@ namespace BootNET.Core
             {
                 VGAScreen.SetFont(PCScreenFont.Default.CreateVGAFont(), PCScreenFont.Default.Height);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ErrorScreen("Error while initializing Console: " + ex.Message);
             }
@@ -28,7 +28,7 @@ namespace BootNET.Core
             {
                 NetworkManager.Initialize(new(1, 1, 1, 1));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Network not connected: " + ex.Message);
@@ -39,7 +39,7 @@ namespace BootNET.Core
             {
                 SoundManager.Initialize();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Sound disabled: " + ex.Message);
@@ -50,7 +50,7 @@ namespace BootNET.Core
             {
                 FilesystemManager.Initialize(true, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Filesystem is disabled: " + ex.Message);

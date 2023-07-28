@@ -72,6 +72,9 @@ csharp_prefer_static_local_function = true:suggestion
 csharp_style_prefer_readonly_struct = true:suggestion
 csharp_style_prefer_readonly_struct_member = true:suggestion
 
+# CS0164: This label has not been referenced
+dotnet_diagnostic.CS0164.severity = none
+
 [*.vb]
 #### Stili di denominazione ####
 
