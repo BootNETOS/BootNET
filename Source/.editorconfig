@@ -75,6 +75,9 @@ csharp_style_prefer_readonly_struct_member = true:suggestion
 # CS0164: This label has not been referenced
 dotnet_diagnostic.CS0164.severity = none
 
+# CA1816: Dispose methods should call SuppressFinalize
+dotnet_diagnostic.CA1816.severity = none
+
 [*.vb]
 #### Stili di denominazione ####
 
