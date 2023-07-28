@@ -18,7 +18,7 @@ namespace BootNET.Core
             try
             {
                 VGAScreen.SetFont(PCScreenFont.Default.CreateVGAFont(), PCScreenFont.Default.Height);
-                Program.commandManager.
+                Program.commandManager = new();
             }
             catch (Exception ex)
             {
