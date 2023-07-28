@@ -1,4 +1,6 @@
-﻿using Cosmos.Core;
+﻿using BootNET.Graphics.Fonts;
+using BootNET.Graphics.Rasterizer;
+using Cosmos.Core;
 using System;
 using System.Linq;
 using System.Numerics;

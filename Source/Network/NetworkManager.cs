@@ -3,6 +3,7 @@ using Cosmos.System.Network.IPv4;
 using Cosmos.System.Network.IPv4.TCP;
 using Cosmos.System.Network.IPv4.UDP.DHCP;
 using Cosmos.System.Network.IPv4.UDP.DNS;
+using System.IO;
 using System.Text;
 
 namespace BootNET.Network
@@ -30,20 +31,19 @@ namespace BootNET.Network
         /// </summary>
         /// <param name="url">URL of the file.</param>
         /// <returns></returns>
-        public static string DownloadFile(string url)
+        public static void DownloadFile(string url, string path)
         {
-            var dnsClient = new DnsClient();
             var tcpClient = new TcpClient(80);
 
-            dnsClient.Connect(DNSConfig.DNSNameservers[0]);
-            dnsClient.SendAsk(url);
-            Address address = dnsClient.Receive();
-            dnsClient.Close();
+            DNSClient.Connect(DNSConfig.DNSNameservers[0]);
+            DNSClient.SendAsk(url);
+            Address address = DNSClient.Receive();
+            DNSClient.Close();
 
             tcpClient.Connect(address, 80);
 
             string httpget = "GET / HTTP/1.1\r\n" +
-                             "User-Agent: Wget (CosmosOS)\r\n" +
+                             "User-Agent: BootNET (CosmosOS)\r\n" +
                              "Accept: */*\r\n" +
                              "Accept-Encoding: identity\r\n" +
                              "Host: " + url + "\r\n" +
@@ -56,7 +56,8 @@ namespace BootNET.Network
             tcpClient.Close();
 
             string httpresponse = Encoding.ASCII.GetString(data);
-            return httpresponse;
+            File.Create(path);
+            File.WriteAllText(path, httpresponse);
         }
         #endregion
 
