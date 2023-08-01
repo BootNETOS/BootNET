@@ -1,38 +1,35 @@
 ﻿using System;
 using System.IO;
 
-namespace CCG
+namespace BootNET.Graphics
 {
     /// <summary>
-    /// CCG (Cosmos Console Graphics) https://github.com/CodeDevel0per/ccg
+    /// CCG (Cosmos Console Graphics) is a very standardized way of making "gui" in the console interface
     /// </summary>
-    public class CCG
+    public class Ccg
     {
-        #region Constructors
+        private string _config;
         /// <summary>
-        /// Initialize CCG with a config string.
+        /// Initialize CCG using a config string.
         /// </summary>
-        /// <param name="file"></param>
-        public CCG(string file)
+        /// <param name="file">Config file.</param>
+        public Ccg(string file)
         {
-            this.config = file;
+            this._config = file;
         }
-        #endregion
-
-        #region Methods
         /// <summary>
-        /// Update the CCG.
+        /// Run the app.
         /// </summary>
         public void Run()
         {
-        rerun:
+            rerun:
             var title = "Title";
             var description = "Text";
             var color = ConsoleColor.Blue;
             string nextPage = null;
             bool dialog = true;
 
-            var file = config.Split('\n');
+            var file = _config.Split('\n');
             foreach (var line in file)
             {
                 if (line.StartsWith(":"))
@@ -78,11 +75,12 @@ namespace CCG
 
             if (dialog)
             {
-            redraw:
+                redraw:
                 Console.BackgroundColor = color;
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Clear();
-                Console.SetCursorPosition(Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2), Console.WindowHeight / 2 - (Console.WindowHeight / 2 / 2));
+                Console.SetCursorPosition(Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2),
+                    Console.WindowHeight / 2 - (Console.WindowHeight / 2 / 2));
                 Console.BackgroundColor = ConsoleColor.White;
                 for (var i = 0; i < 14; i++)
                 {
@@ -91,6 +89,7 @@ namespace CCG
                     Console.CursorVisible = false;
                     Console.Write(new string(' ', Console.WindowWidth / 2));
                 }
+
                 Console.CursorTop = Console.WindowHeight / 2 - (Console.WindowHeight / 2 / 2);
                 Console.CursorLeft = Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2);
                 Console.ForegroundColor = color;
@@ -99,7 +98,8 @@ namespace CCG
                 Console.WriteLine("  " + description);
                 if (select == "ok")
                 {
-                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) + Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
+                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) +
+                        Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
                     Console.CursorTop += 10;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.White;
@@ -109,7 +109,8 @@ namespace CCG
                 }
                 else if (select == "cancel")
                 {
-                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) + Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
+                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) +
+                        Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
                     Console.CursorTop += 10;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.Cyan;
@@ -117,10 +118,12 @@ namespace CCG
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.WriteLine(" <OK> ");
                 }
-            redrawbtns:
+
+                redrawbtns:
                 if (select == "ok")
                 {
-                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) + Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
+                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) +
+                        Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
                     Console.CursorTop -= 1;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.White;
@@ -130,7 +133,8 @@ namespace CCG
                 }
                 else if (select == "cancel")
                 {
-                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) + Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
+                    Console.CursorLeft = (Console.WindowWidth / 2 - (Console.WindowWidth / 2 / 2)) +
+                        Console.WindowWidth / 2 - (" <Cancel>  <OK>    ").Length;
                     Console.CursorTop -= 1;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.Cyan;
@@ -138,7 +142,8 @@ namespace CCG
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.WriteLine(" <OK> ");
                 }
-            keyReading:
+
+                keyReading:
                 var key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Enter)
                 {
@@ -152,7 +157,7 @@ namespace CCG
                         }
                         else if (File.Exists(nextPage))
                         {
-                            this.config = File.ReadAllText(nextPage);
+                            this._config = File.ReadAllText(nextPage);
                             Run();
                         }
                     }
@@ -177,13 +182,9 @@ namespace CCG
                 {
                     goto keyReading;
                 }
+
                 Console.Clear();
             }
         }
-        #endregion
-
-        #region Fields
-        private string config = "";
-        #endregion
     }
 }
