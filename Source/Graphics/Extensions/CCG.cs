@@ -1,19 +1,19 @@
 ﻿using System;
 using System.IO;
 
-namespace BootNET.Graphics
+namespace BootNET.Graphics.Extensions
 {
     /// <summary>
     /// CCG (Cosmos Console Graphics) is a very standardized way of making "gui" in the console interface
     /// </summary>
-    public class Ccg
+    public class CCG
     {
         private string _config;
         /// <summary>
         /// Initialize CCG using a config string.
         /// </summary>
         /// <param name="file">Config file.</param>
-        public Ccg(string file)
+        public CCG(string file)
         {
             this._config = file;
         }
