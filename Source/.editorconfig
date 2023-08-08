@@ -1,13 +1,7 @@
 ﻿[*.cs]
-
-# IDE0052: Rimuovi i membri privati non letti
 dotnet_diagnostic.IDE0052.severity = none
 
 [*.cs]
-#### Stili di denominazione ####
-
-# Regole di denominazione
-
 dotnet_naming_rule.interface_should_be_begins_with_i.severity = suggestion
 dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
 dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
@@ -20,8 +14,6 @@ dotnet_naming_rule.non_field_members_should_be_pascal_case.severity = suggestion
 dotnet_naming_rule.non_field_members_should_be_pascal_case.symbols = non_field_members
 dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
 
-# Specifiche dei simboli
-
 dotnet_naming_symbols.interface.applicable_kinds = interface
 dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.interface.required_modifiers = 
@@ -33,8 +25,6 @@ dotnet_naming_symbols.types.required_modifiers =
 dotnet_naming_symbols.non_field_members.applicable_kinds = property, event, method
 dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.non_field_members.required_modifiers = 
-
-# Stili di denominazione
 
 dotnet_naming_style.begins_with_i.required_prefix = I
 dotnet_naming_style.begins_with_i.required_suffix = 
@@ -72,17 +62,11 @@ csharp_prefer_static_local_function = true:suggestion
 csharp_style_prefer_readonly_struct = true:suggestion
 csharp_style_prefer_readonly_struct_member = true:suggestion
 
-# CS0164: This label has not been referenced
 dotnet_diagnostic.CS0164.severity = none
 
-# CA1816: Dispose methods should call SuppressFinalize
 dotnet_diagnostic.CA1816.severity = none
 
 [*.vb]
-#### Stili di denominazione ####
-
-# Regole di denominazione
-
 dotnet_naming_rule.interface_should_be_inizia_con_i.severity = suggestion
 dotnet_naming_rule.interface_should_be_inizia_con_i.symbols = interface
 dotnet_naming_rule.interface_should_be_inizia_con_i.style = inizia_con_i
@@ -95,8 +79,6 @@ dotnet_naming_rule.membri_non_di_campo_should_be_notazione_pascal.severity = sug
 dotnet_naming_rule.membri_non_di_campo_should_be_notazione_pascal.symbols = membri_non_di_campo
 dotnet_naming_rule.membri_non_di_campo_should_be_notazione_pascal.style = notazione_pascal
 
-# Specifiche dei simboli
-
 dotnet_naming_symbols.interface.applicable_kinds = interface
 dotnet_naming_symbols.interface.applicable_accessibilities = public, friend, private, protected, protected_friend, private_protected
 dotnet_naming_symbols.interface.required_modifiers = 
@@ -108,8 +90,6 @@ dotnet_naming_symbols.tipi.required_modifiers =
 dotnet_naming_symbols.membri_non_di_campo.applicable_kinds = property, event, method
 dotnet_naming_symbols.membri_non_di_campo.applicable_accessibilities = public, friend, private, protected, protected_friend, private_protected
 dotnet_naming_symbols.membri_non_di_campo.required_modifiers = 
-
-# Stili di denominazione
 
 dotnet_naming_style.inizia_con_i.required_prefix = I
 dotnet_naming_style.inizia_con_i.required_suffix = 
