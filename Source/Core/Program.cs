@@ -1,5 +1,5 @@
-﻿using BootNET.Shell;
-using Cosmos.System;
+﻿using Cosmos.System;
+using BootNET.Graphics.Extensions;
 
 namespace BootNET.Core
 {
@@ -8,10 +8,12 @@ namespace BootNET.Core
         protected override void BeforeRun()
         {
             BootManager.Boot();
+            GraphicalConsole.Initialize(1280,720);        
         }
 
         protected override void Run()
         {
+            System.Console.WriteLine("It works!");
         }
     }
 }

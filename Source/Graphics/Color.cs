@@ -418,7 +418,7 @@ public struct Color
 	/// <summary>
 	/// Property used to get the overall brightness of the color.
 	/// </summary>
-	public float Brightness => (Max(this) + Min(this)) / (byte.MaxValue * 2f);
+	public readonly float Brightness => (Max(this) + Min(this)) / (byte.MaxValue * 2f);
 
 	/// <summary>
 	/// Packed ARGB value of the color.
@@ -712,6 +712,35 @@ public struct Color
 	public Color ToGrayscale()
 	{
 		return new(255, Brightness, Brightness, Brightness);
+	}
+
+	/// <summary>
+	/// Converts a console color into a 32-BIT RGB color.
+	/// </summary>
+	/// <param name="Color">Console color to convert.</param>
+	/// <returns>32-BIT RGB Color.</returns>
+	public static Color FromConsoleColor(ConsoleColor Color)
+	{
+		return Color switch
+		{
+			ConsoleColor.Black => Black,
+			ConsoleColor.DarkBlue => Blue - 64,
+			ConsoleColor.DarkGreen => Green - 64,
+			ConsoleColor.DarkCyan => Cyan - 64,
+			ConsoleColor.DarkRed => Red - 64,
+			ConsoleColor.DarkMagenta => Magenta - 64,
+			ConsoleColor.DarkYellow => Yellow - 64,
+			ConsoleColor.Gray => LightGray,
+			ConsoleColor.DarkGray => DeepGray - 64,
+			ConsoleColor.Blue => Blue,
+			ConsoleColor.Green => Green,
+			ConsoleColor.Cyan => Cyan,
+			ConsoleColor.Red => Red,
+			ConsoleColor.Magenta => Magenta,
+			ConsoleColor.Yellow => Yellow,
+			ConsoleColor.White => White,
+			_ => Black,
+		};
 	}
 
 	#endregion

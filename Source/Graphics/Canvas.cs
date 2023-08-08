@@ -844,7 +844,7 @@ public unsafe class Canvas
 	/// <param name="Font">Font to use.</param>
 	/// <param name="Color">The <see cref="Color"/> object to draw with.</param>
 	/// <param name="Center">Option to cented the text at X and Y.</param>
-	public void DrawString(int X, int Y, string Text, Font? Font, Color Color, bool Center = false)
+	public void DrawString(int X, int Y, string Text, Font Font, Color Color, bool Center = false)
 	{
 		// Basic null check.
 		if (string.IsNullOrEmpty(Text))
@@ -911,6 +911,44 @@ public unsafe class Canvas
 			BX += Temp.Width + 2;
 		}
 	}
+	/// <summary>
+		/// Draw a single character at X and Y.
+		/// </summary>
+		/// <param name="X">X position.</param>
+		/// <param name="Y">Y position.</param>
+		/// <param name="Char">Char to draw.</param>
+		/// <param name="Font">Font to use.</param>
+		/// <param name="Color">Color to draw with.</param>
+		/// <param name="Center">Option to center the char at X and Y.</param>
+		/// <returns>Width of the drawn character.</returns>
+		public int DrawChar(int X, int Y, char Char, Font Font, Color Color, bool Center)
+		{
+			// Get the glyph for this char.
+			Glyph Temp = Font.GetGlyph(Char);
+
+			// Center the position if needed.
+			if (Center)
+			{
+				Y -= Temp.Height / 2;
+				X -= Temp.Width / 2;
+			}
+
+			// Return if nothing needs to be done.
+			if (Temp.Points.Count == 0)
+			{
+				return Temp.Width;
+
+			}
+
+			// Draw all pixels.
+			for (int I = 0; I < Temp.Points.Count; I++)
+			{
+				this[X + Temp.Points[I].X, Y + Temp.Points[I].Y] = Color;
+			}
+
+			// Return total width of the glyph.
+			return Temp.Width;
+		}
 
 	#endregion
 
