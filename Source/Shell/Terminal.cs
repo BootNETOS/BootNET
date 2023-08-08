@@ -17,9 +17,13 @@ namespace BootNET.Shell
             Console.ResetColor();
             Console.Write(">");
             string input = Console.ReadLine();
-            string response = Program.commandManager.ProcessInput(input);
+            string response = CommandManager.ProcessInput(input);
             Console.WriteLine(response);
         }
+        #endregion
+
+        #region Fields
+        public static CommandManager CommandManager {get;set;} = new();
         #endregion
     }
 }
