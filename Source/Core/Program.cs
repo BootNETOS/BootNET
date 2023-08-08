@@ -13,7 +13,8 @@ namespace BootNET.Core
 
         protected override void Run()
         {
-            System.Console.WriteLine("It works!");
+            GraphicalConsole.Write(">");
+            GraphicalConsole.WriteLine(GraphicalConsole.ReadLine());
         }
     }
 }

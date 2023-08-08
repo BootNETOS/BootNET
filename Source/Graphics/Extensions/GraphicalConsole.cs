@@ -179,7 +179,7 @@ namespace BootNET.Graphics.Extensions
 
         private static void WriteCore(char C)
         {
-            if (MaxLines != Y)
+            if (Y >= MaxLines)
             {
                 Buffer += C;
 
@@ -275,11 +275,11 @@ namespace BootNET.Graphics.Extensions
         private static bool IsCursorEnabled { get; set; } = true;
         private static string Buffer { get; set; } = string.Empty;
         public static Display Canvas { get; set; }
-        private static int SpacingX { get; set; } = 5;
-        private static int SpacingY { get; set; } = 5;
-        private static int X { get; set; } = 5;
-        private static int Y { get; set; } = 5;
-        private static int MaxLines { get; set; } = Canvas.Height / 20;
+        private static int SpacingX { get; set; } = 0;
+        private static int SpacingY { get; set; } = 0;
+        private static int X { get; set; } = 0;
+        private static int Y { get; set; } = 0;
+        private static int MaxLines { get; set; } = Canvas.Height / Font.Fallback.GetGlyph(' ').Height;
         public static ConsoleColor ForegroundColor { get; set; } = ConsoleColor.White;
         public static ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Black;
 

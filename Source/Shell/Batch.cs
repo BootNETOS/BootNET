@@ -17,7 +17,7 @@ namespace BootNET.Shell
                     {
                         if (!(line.StartsWith(";")))
                         {
-                            string response = Program.commandManager.ProcessInput(line);
+                            string response = Terminal.CommandManager.ProcessInput(line);
                             Console.WriteLine(response);
                         }
                     }
