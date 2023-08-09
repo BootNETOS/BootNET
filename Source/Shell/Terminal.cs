@@ -1,5 +1,4 @@
 ﻿using BootNET.Core;
-using System;
 
 namespace BootNET.Shell
 {

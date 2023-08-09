@@ -1,8 +1,6 @@
 ﻿using BootNET.Audio;
 using BootNET.Filesystem;
 using BootNET.Network;
-using Cosmos.System.Graphics;
-using Cosmos.System.Graphics.Fonts;
 using System;
 using System.IO;
 
@@ -21,7 +19,7 @@ namespace BootNET.Core
             Console.WriteLine("Initializing Console...");
             try
             {
-                VGAScreen.SetFont(PCScreenFont.Default.CreateVGAFont(), PCScreenFont.Default.Height);
+                Console.Initialize();
             }
             catch (Exception ex)
             {
@@ -33,9 +31,9 @@ namespace BootNET.Core
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.SetForegroundColor(ConsoleColor.Yellow);
                 Console.WriteLine("Network not connected: " + ex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetForegroundColor(ConsoleColor.White);
             }
             try
             {
@@ -43,9 +41,9 @@ namespace BootNET.Core
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.SetForegroundColor(ConsoleColor.Yellow);
                 Console.WriteLine("Sound disabled: " + ex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetForegroundColor(ConsoleColor.White);
             }
             try
             {
@@ -54,9 +52,9 @@ namespace BootNET.Core
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.SetForegroundColor(ConsoleColor.Yellow);
                 Console.WriteLine("Filesystem is disabled: " + ex.Message);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.SetForegroundColor(ConsoleColor.White);
                 FilesystemEnabled = false;
             }
             Console.WriteLine("Detecting BootNET...");
@@ -77,6 +75,7 @@ namespace BootNET.Core
             {
                 Installed = false;
             }
+            Console.WriteLine();
         }
         /// <summary>
         /// Print error screen.
@@ -85,11 +84,11 @@ namespace BootNET.Core
         public static void ErrorScreen(string message)
         {
             Console.ResetColor();
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetForegroundColor(ConsoleColor.Red);
             Console.WriteLine("Error: " + message);
             Console.WriteLine("If it's the first time happening please read documentation on GitHub.");
-            Console.WriteLine("Press any key to reboot...");
-            Console.ReadKey();
+            Console.WriteLine("Press enter key to reboot...");
+            Console.ReadLine();
             Cosmos.System.Power.Reboot();
         }
     }

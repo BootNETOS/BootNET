@@ -1,5 +1,4 @@
 ﻿using BootNET.Core;
-using System;
 using System.IO;
 
 namespace BootNET.Shell
@@ -18,18 +17,18 @@ namespace BootNET.Shell
                         if (!(line.StartsWith(";")))
                         {
                             string response = Terminal.CommandManager.ProcessInput(line);
-                            Console.WriteLine(response);
+                            BootNET.Core.Console.WriteLine(response);
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine("This file is not a valid script.");
+                    BootNET.Core.Console.WriteLine("This file is not a valid script.");
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                BootNET.Core.Console.WriteLine("Error: " + ex.Message);
             }
         }
     }

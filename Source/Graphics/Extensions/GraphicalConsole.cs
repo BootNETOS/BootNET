@@ -1,9 +1,7 @@
 using static Cosmos.HAL.Global;
 using System;
 using IL2CPU.API.Attribs;
-using Cosmos.Core;
 using BootNET.Graphics.Fonts;
-using BootNET.Graphics.Extensions;
 using BootNET.Core;
 
 namespace BootNET.Graphics.Extensions
@@ -12,7 +10,7 @@ namespace BootNET.Graphics.Extensions
     /// Graphical Console class, used to write text output to a high resolution console.
     /// Supports images, shapes, and everything else.
     /// </summary>
-    [Plug(Target = typeof(Console))]
+    [Plug(Target = typeof(System.Console))]
     public static unsafe class GraphicalConsole
     {
         #region Methods
@@ -179,7 +177,7 @@ namespace BootNET.Graphics.Extensions
 
         private static void WriteCore(char C)
         {
-            if (Y >= MaxLines)
+            if (Y != Canvas.Height - Font.Fallback.Size)
             {
                 Buffer += C;
 
@@ -214,10 +212,6 @@ namespace BootNET.Graphics.Extensions
                             {
                                 X += Font.Fallback.MeasureString(C.ToString());
                             }
-                            if (Y == Canvas.Height)
-                            {
-                                MemoryOperations.Copy(Canvas.Internal, Canvas.Internal + (Canvas.Width * Font.Fallback.Size), (int)(Canvas.Size - (Canvas.Width * Font.Fallback.Size)));
-                            }
                         }
                         break;
                 }
@@ -244,6 +238,7 @@ namespace BootNET.Graphics.Extensions
         public static void Initialize(ushort Width, ushort Height)
         {
             Canvas = Display.GetDisplay(Width, Height);
+            Initialized = true;
             PIT.RegisterTimer(new(() =>
             {
                 if (IsCursorVisible && IsCursorEnabled)
@@ -279,10 +274,9 @@ namespace BootNET.Graphics.Extensions
         private static int SpacingY { get; set; } = 0;
         private static int X { get; set; } = 0;
         private static int Y { get; set; } = 0;
-        private static int MaxLines { get; set; } = Canvas.Height / Font.Fallback.GetGlyph(' ').Height;
         public static ConsoleColor ForegroundColor { get; set; } = ConsoleColor.White;
         public static ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Black;
-
+        public static bool Initialized { get; set; }
         #endregion
     }
 }

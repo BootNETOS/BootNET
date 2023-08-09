@@ -6,7 +6,7 @@ namespace BootNET.Graphics;
 /// <summary>
 /// Color class, used for drawing.
 /// </summary>
-public struct Color
+public struct Color 
 {
 	#region Constructors
 
@@ -709,7 +709,7 @@ public struct Color
 	/// Converts the color to be only in grayscale.
 	/// </summary>
 	/// <returns>Grayscale color.</returns>
-	public Color ToGrayscale()
+	public readonly Color ToGrayscale()
 	{
 		return new(255, Brightness, Brightness, Brightness);
 	}

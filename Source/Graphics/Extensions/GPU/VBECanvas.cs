@@ -1,5 +1,7 @@
 using System;
 using Cosmos.Core.Multiboot;
+using Cosmos.Core;
+using Cosmos.System.Graphics;
 
 namespace BootNET.Graphics.Extensions.GPU;
 
@@ -53,6 +55,5 @@ public unsafe class VBECanvas : Display
         CopyTo((uint*)Multiboot2.Framebuffer->Address);
         _Frames++;
     }
-
     #endregion
 }
