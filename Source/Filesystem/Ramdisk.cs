@@ -86,7 +86,23 @@ namespace BootNET.Filesystem
             else
             {
                 throw new Exception("Cannot find file \"" + file + "\"");
-                // if copy and pasting didn't exist, writing that byte array would be so painful lmao
+            }
+        }
+        /// <summary>
+        /// Delete a file.
+        /// </summary>
+        /// <param name="file">File to delete.</param>
+        /// <exception cref="Exception">Throws if file not found.</exception>
+        public void DeleteText(string file)
+        {
+            try
+            {
+                RootDir.Remove(file);
+            }
+            catch
+            {
+                throw new Exception("Cannot find file \"" + file + "\"");
+
             }
         }
 
@@ -98,6 +114,13 @@ namespace BootNET.Filesystem
         public bool FileExists(string file)
         {
             return RootDir.ContainsKey(file);
+        }
+        /// <summary>
+        /// Clear the ramdisk.
+        /// </summary>
+        public void Format()
+        {
+            RootDir.Clear();
         }
         #endregion
 
