@@ -85,5 +85,22 @@ namespace BootNET.Core
                 SConsole.ResetColor();
             }
         }
+
+        public static void Clear()
+        {
+            if (GConsole.Initialized)
+            {
+                GConsole.Clear();
+            }
+            else
+            {
+                SConsole.Clear();
+            }
+        }
+
+        public static void SetCursorPosition(int x, int y)
+        {
+            SConsole.SetCursorPosition(x, y);
+        }
     }
 }

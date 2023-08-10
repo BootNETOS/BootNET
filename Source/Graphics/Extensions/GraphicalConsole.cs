@@ -260,6 +260,12 @@ namespace BootNET.Graphics.Extensions
             }, 500000000, true));
         }
 
+        public static void SetCursorPosition(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
         #endregion
 
         #endregion
@@ -272,8 +278,10 @@ namespace BootNET.Graphics.Extensions
         public static Display Canvas { get; set; }
         private static int SpacingX { get; set; } = 0;
         private static int SpacingY { get; set; } = 0;
-        private static int X { get; set; } = 0;
-        private static int Y { get; set; } = 0;
+        public static int X { get; set; } = 0;
+        public static int Y { get; set; } = 0;
+        public static int WindowWidth { get; set; } = Canvas.Width / 9;
+        public static int WindowHeight { get; set; } = Canvas.Height / Font.Fallback.Size;
         public static ConsoleColor ForegroundColor { get; set; } = ConsoleColor.White;
         public static ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Black;
         public static bool Initialized { get; set; }
