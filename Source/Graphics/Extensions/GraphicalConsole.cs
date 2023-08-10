@@ -275,7 +275,11 @@ public static class GraphicalConsole
 
     private static void WriteCore(char C)
     {
-        if (Y != Kernel.Canvas.Height - Font.Fallback.Size)
+        if (Y >= Kernel.Canvas.Height - Font.Fallback.Size)
+        {
+            Clear();
+        }
+        else
         {
             Buffer += C;
 
@@ -315,10 +319,6 @@ public static class GraphicalConsole
 
                     break;
             }
-        }
-        else
-        {
-            Clear();
         }
     }
 

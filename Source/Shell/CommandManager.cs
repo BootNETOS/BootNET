@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BootNET.Shell.Commands.Apps;
+using BootNET.Shell.Commands.Network;
 using BootNET.Shell.Commands.Terminal;
 
 namespace BootNET.Shell;
@@ -25,10 +26,11 @@ public class CommandManager
     {
         commands = new List<Command>
         {
-            new Command(""),
+            new(""),
             new Calc("calc"),
             new Clear("clear"),
-            new Echo("echo")
+            new Echo("echo"),
+            new Ping("ping")
         };
     }
 

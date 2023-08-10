@@ -9,16 +9,16 @@ namespace BootNET.Graphics;
 /// </summary>
 public static unsafe class Filters
 {
-	/// <summary>
-	///     Samples/Crops a graphics item.
-	/// </summary>
-	/// <param name="X">The X position to start at.</param>
-	/// <param name="Y">The Y position to start at.</param>
-	/// <param name="Width">The Width to sample.</param>
-	/// <param name="Height">The Height to sample.</param>
-	/// <param name="G">The graphics to sample.</param>
-	/// <returns>A sampled image.</returns>
-	public static Canvas Sample(int X, int Y, ushort Width, ushort Height, Canvas G)
+    /// <summary>
+    ///     Samples/Crops a graphics item.
+    /// </summary>
+    /// <param name="X">The X position to start at.</param>
+    /// <param name="Y">The Y position to start at.</param>
+    /// <param name="Width">The Width to sample.</param>
+    /// <param name="Height">The Height to sample.</param>
+    /// <param name="G">The graphics to sample.</param>
+    /// <returns>A sampled image.</returns>
+    public static Canvas Sample(int X, int Y, ushort Width, ushort Height, Canvas G)
     {
         // Create temporary graphics object.
         Canvas Temp = new(Width, Height);
@@ -42,15 +42,15 @@ public static unsafe class Filters
         return Temp;
     }
 
-	/// <summary>
-	///     Re-scales the image to the desired size.
-	/// </summary>
-	/// <param name="Width">New width to scale to.</param>
-	/// <param name="Height">New height to scale to.</param>
-	/// <param name="G">The canvas to filter.</param>
-	/// <returns>Filtered canvas image.</returns>
-	/// <exception cref="NotImplementedException">Thrown if scale method does not exist.</exception>
-	public static Canvas Scale(ushort Width, ushort Height, Canvas G)
+    /// <summary>
+    ///     Re-scales the image to the desired size.
+    /// </summary>
+    /// <param name="Width">New width to scale to.</param>
+    /// <param name="Height">New height to scale to.</param>
+    /// <param name="G">The canvas to filter.</param>
+    /// <returns>Filtered canvas image.</returns>
+    /// <exception cref="NotImplementedException">Thrown if scale method does not exist.</exception>
+    public static Canvas Scale(ushort Width, ushort Height, Canvas G)
     {
         // Out of bounds check.
         if (Width <= 0 || Height <= 0 || Width == G.Width || Height == G.Height) return G;
@@ -78,13 +78,13 @@ public static unsafe class Filters
         return Result;
     }
 
-	/// <summary>
-	///     Masks the gradient over anything in the input surface that isn't alpha.
-	/// </summary>
-	/// <param name="Input">The input canvas to mask.</param>
-	/// <param name="Mask">The mask to use on top of the input.</param>
-	/// <returns>A masked canvas.</returns>
-	public static Canvas MaskAlpha(Canvas ToMask, Canvas Mask)
+    /// <summary>
+    ///     Masks the gradient over anything in the input surface that isn't alpha.
+    /// </summary>
+    /// <param name="Input">The input canvas to mask.</param>
+    /// <param name="Mask">The mask to use on top of the input.</param>
+    /// <returns>A masked canvas.</returns>
+    public static Canvas MaskAlpha(Canvas ToMask, Canvas Mask)
     {
         // Create a temporary buffer.
         Canvas Temp = new(ToMask.Width, ToMask.Height);
@@ -102,13 +102,13 @@ public static unsafe class Filters
         return Temp;
     }
 
-	/// <summary>
-	///     Rotates the image to the desired angle.
-	/// </summary>
-	/// <param name="Angle">Angle to rotate in.</param>
-	/// <param name="G">The canvas to filter.</param>
-	/// <returns>Filtered canvas image.</returns>
-	public static Canvas Rotate(double Angle, Canvas G)
+    /// <summary>
+    ///     Rotates the image to the desired angle.
+    /// </summary>
+    /// <param name="Angle">Angle to rotate in.</param>
+    /// <param name="G">The canvas to filter.</param>
+    /// <returns>Filtered canvas image.</returns>
+    public static Canvas Rotate(double Angle, Canvas G)
     {
         // Define temporary canvas object.
         Canvas Result;
@@ -166,15 +166,15 @@ public static unsafe class Filters
         return Result;
     }
 
-	/// <summary>
-	///     Applies an HDR affect to an image given the High and Low exposure inputs.
-	///     Assumes High and Low are the same size as Normal.
-	/// </summary>
-	/// <param name="High">The high exposure variant.</param>
-	/// <param name="Normal">The normal exposure variant.</param>
-	/// <param name="Low">The low exposure variant.</param>
-	/// <returns>And image with a HDR effect applied to it.</returns>
-	public static Canvas ApplyHDR(Canvas High, Canvas Normal, Canvas Low)
+    /// <summary>
+    ///     Applies an HDR affect to an image given the High and Low exposure inputs.
+    ///     Assumes High and Low are the same size as Normal.
+    /// </summary>
+    /// <param name="High">The high exposure variant.</param>
+    /// <param name="Normal">The normal exposure variant.</param>
+    /// <param name="Low">The low exposure variant.</param>
+    /// <returns>And image with a HDR effect applied to it.</returns>
+    public static Canvas ApplyHDR(Canvas High, Canvas Normal, Canvas Low)
     {
         // Create result canvas instance.
         Canvas Result = new(Normal.Width, Normal.Height);
@@ -186,13 +186,13 @@ public static unsafe class Filters
         return Result;
     }
 
-	/// <summary>
-	///     Applies a basic anti-aliasing filter to the graphics layer.
-	///     Warning: This method is somewhat slow.
-	/// </summary>
-	/// <param name="G">The canvas to filter.</param>
-	/// <returns>Filtered canvas image.</returns>
-	public static Canvas ApplyAA(Canvas G)
+    /// <summary>
+    ///     Applies a basic anti-aliasing filter to the graphics layer.
+    ///     Warning: This method is somewhat slow.
+    /// </summary>
+    /// <param name="G">The canvas to filter.</param>
+    /// <returns>Filtered canvas image.</returns>
+    public static Canvas ApplyAA(Canvas G)
     {
         // Create temporary graphics buffer.
         Canvas Result = new(G.Width, G.Height);
@@ -218,12 +218,12 @@ public static unsafe class Filters
         return Result;
     }
 
-	/// <summary>
-	///     Inverts an image's colors.
-	/// </summary>
-	/// <param name="G">The input to invert.</param>
-	/// <returns>An inverted version of the input.</returns>
-	public static Canvas Invert(Canvas G)
+    /// <summary>
+    ///     Inverts an image's colors.
+    /// </summary>
+    /// <param name="G">The input to invert.</param>
+    /// <returns>An inverted version of the input.</returns>
+    public static Canvas Invert(Canvas G)
     {
         // Define new canvas to write inverted colors to.
         Canvas Result = new(G.Width, G.Height);

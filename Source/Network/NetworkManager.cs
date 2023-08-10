@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using BootNET.Core;
 using Cosmos.System.Network.Config;
 using Cosmos.System.Network.IPv4;
 using Cosmos.System.Network.IPv4.TCP;
@@ -67,6 +68,80 @@ public static class NetworkManager
         var httpresponse = Encoding.ASCII.GetString(data);
         File.Create(path);
         File.WriteAllText(path, httpresponse);
+    }
+
+    public static void PingHost(string address)
+    {
+        var PacketSent = 0;
+        var PacketReceived = 0;
+        var PacketLost = 0;
+        int PercentLoss;
+
+        Address source;
+        var destination = Address.Parse(address);
+
+        if (destination != null)
+        {
+            source = IPConfig.FindNetwork(destination);
+        }
+        else //Make a DNS request if it's not an IP
+        {
+            var xClient = new DnsClient();
+            xClient.Connect(DNSConfig.DNSNameservers[0]);
+            xClient.SendAsk(address);
+            destination = xClient.Receive();
+            xClient.Close();
+
+            if (destination == null) Console.WriteLine("Failed to get DNS response for " + address);
+
+            source = IPConfig.FindNetwork(destination);
+        }
+
+        try
+        {
+            Console.WriteLine("Sending ping to " + destination);
+
+            var xClient = new ICMPClient();
+            xClient.Connect(destination);
+
+            for (var i = 0; i < 4; i++)
+            {
+                xClient.SendEcho();
+
+                PacketSent++;
+
+                var endpoint = new EndPoint(Address.Zero, 0);
+
+                var second = xClient.Receive(ref endpoint, 4000);
+
+                if (second == -1)
+                {
+                    Console.WriteLine("Destination host unreachable.");
+                    PacketLost++;
+                }
+                else
+                {
+                    if (second < 1)
+                        Console.WriteLine("Reply received from " + endpoint.Address + " time < 1s");
+                    else if (second >= 1)
+                        Console.WriteLine("Reply received from " + endpoint.Address + " time " + second + "s");
+
+                    PacketReceived++;
+                }
+            }
+
+            xClient.Close();
+        }
+        catch
+        {
+        }
+
+        PercentLoss = 25 * PacketLost;
+
+        Console.WriteLine();
+        Console.WriteLine("Ping statistics for " + destination + ":");
+        Console.WriteLine("    Packets: Sent = " + PacketSent + ", Received = " + PacketReceived + ", Lost = " +
+                          PacketLost + " (" + PercentLoss + "% loss)");
     }
 
     #endregion

@@ -8,28 +8,28 @@ namespace BootNET.Graphics;
 /// </summary>
 public class Gradient : Canvas
 {
-	/// <summary>
-	///     Creates a new gradient drawn on an instance of a <see cref="Canvas" /> object.
-	/// </summary>
-	/// <param name="Width">Width (in pixels) of the gradient.</param>
-	/// <param name="Height">Height (in pixels) of the gradient.</param>
-	/// <param name="Start">The starting color.</param>
-	/// <param name="End">The end color.</param>
-	/// <returns>A new instance of a graphics object.</returns>
-	public Gradient(ushort Width, ushort Height, Color Start, Color End) : base(Width, Height)
+    /// <summary>
+    ///     Creates a new gradient drawn on an instance of a <see cref="Canvas" /> object.
+    /// </summary>
+    /// <param name="Width">Width (in pixels) of the gradient.</param>
+    /// <param name="Height">Height (in pixels) of the gradient.</param>
+    /// <param name="Start">The starting color.</param>
+    /// <param name="End">The end color.</param>
+    /// <returns>A new instance of a graphics object.</returns>
+    public Gradient(ushort Width, ushort Height, Color Start, Color End) : base(Width, Height)
     {
         for (var I = 0; I < Height; I++)
             DrawFilledRectangle(0, I, Width, 1, 0, Color.Lerp(Start, End, 1.0f / Height * I));
     }
 
-	/// <summary>
-	///     Creates a new gradient drawn on an instance of a <see cref="Canvas" /> object.
-	/// </summary>
-	/// <param name="Width">Width (in pixels) of the gradient.</param>
-	/// <param name="Height">Height (in pixels) of the gradient.</param>
-	/// <param name="Colors">The colors to generate in the canvas.</param>
-	/// <returns>A new instance of a graphics object.</returns>
-	public Gradient(ushort Width, ushort Height, Color[] Colors) : base(Width, Height)
+    /// <summary>
+    ///     Creates a new gradient drawn on an instance of a <see cref="Canvas" /> object.
+    /// </summary>
+    /// <param name="Width">Width (in pixels) of the gradient.</param>
+    /// <param name="Height">Height (in pixels) of the gradient.</param>
+    /// <param name="Colors">The colors to generate in the canvas.</param>
+    /// <returns>A new instance of a graphics object.</returns>
+    public Gradient(ushort Width, ushort Height, Color[] Colors) : base(Width, Height)
     {
         // Calculate the height 'delta', it is the total width per gradient pair.
         var HeightDelta = Height / (Colors.Length - 1);
@@ -47,14 +47,14 @@ public class Gradient : Canvas
         }
     }
 
-	/// <summary>
-	///     Creates a new gradient drawn on an instance of a <see cref="Canvas" /> object.
-	/// </summary>
-	/// <param name="Width">Width (in pixels) of the gradient.</param>
-	/// <param name="Height">Height (in pixels) of the gradient.</param>
-	/// <param name="ElapsedMS">The total time passed in the gradient.</param>
-	/// <returns>A new instance of a graphics object.</returns>
-	public Gradient(ushort Width, ushort Height, uint ElapsedMS) : base(Width, Height)
+    /// <summary>
+    ///     Creates a new gradient drawn on an instance of a <see cref="Canvas" /> object.
+    /// </summary>
+    /// <param name="Width">Width (in pixels) of the gradient.</param>
+    /// <param name="Height">Height (in pixels) of the gradient.</param>
+    /// <param name="ElapsedMS">The total time passed in the gradient.</param>
+    /// <returns>A new instance of a graphics object.</returns>
+    public Gradient(ushort Width, ushort Height, uint ElapsedMS) : base(Width, Height)
     {
         // Loop over all pixels.
         for (var X = 0; X < Width; X++)

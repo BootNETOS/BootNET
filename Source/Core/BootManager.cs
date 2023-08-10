@@ -1,17 +1,20 @@
 ﻿using System;
-using System.IO;
 using BootNET.Audio;
-using BootNET.Filesystem;
+using BootNET.Graphics;
+using BootNET.Graphics.Extensions;
 using BootNET.Network;
 using Cosmos.System;
 using Cosmos.System.Network.IPv4;
+using IL2CPU.API.Attribs;
 
 namespace BootNET.Core;
 
 public static class BootManager
 {
-    public static bool FilesystemEnabled;
-    public static bool Installed;
+    [ManifestResourceStream(ResourceName = "BootNET.Resources.BootLogo.bmp")]
+    public static byte[] bootLogo;
+
+    public static Canvas BootLogo = Image.FromBitmap(bootLogo);
 
     /// <summary>
     ///     Boot the system.
@@ -50,36 +53,15 @@ public static class BootManager
             Console.SetForegroundColor(ConsoleColor.White);
         }
 
-        try
+        if (GraphicalConsole.Initialized)
         {
-            FilesystemManager.Initialize(true, true);
-            FilesystemEnabled = true;
+            Program.Canvas.DrawImage(0, GraphicalConsole.Y + 1, BootLogo, false);
+            GraphicalConsole.Y += 101;
         }
-        catch (Exception ex)
+        else
         {
-            Console.SetForegroundColor(ConsoleColor.Yellow);
-            Console.WriteLine("Filesystem is disabled: " + ex.Message);
-            Console.SetForegroundColor(ConsoleColor.White);
-            FilesystemEnabled = false;
-        }
-
-        Console.WriteLine("Detecting BootNET...");
-        try
-        {
-            if (FilesystemEnabled && Directory.Exists("0:\\BootNET\\"))
-            {
-                Console.Write(" Found on 0:\\");
-                Installed = true;
-            }
-            else
-            {
-                Console.Write(" Not found on 0:\\");
-                Installed = false;
-            }
-        }
-        catch
-        {
-            Installed = false;
+            Console.SetForegroundColor(ConsoleColor.DarkMagenta);
+            Console.WriteLine("Welcome to BootNET!");
         }
 
         Console.WriteLine();

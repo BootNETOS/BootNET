@@ -35,4 +35,13 @@
     </ItemGroup>
 
 
+    <ItemGroup>
+        <None Remove="Resources\BootLogo.bmp"/>
+        <EmbeddedResource Include="Resources\BootLogo.bmp"/>
+    </ItemGroup>
+
+
+
+
+
 </Project>
