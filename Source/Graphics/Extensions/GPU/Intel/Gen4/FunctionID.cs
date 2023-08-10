@@ -17,5 +17,5 @@ public enum FunctionID
     GeometryShader = 0xC,
     ClipperUnit = 0xD,
     FanUnit = 0xE,
-    MaskerUnit = 0xF,
+    MaskerUnit = 0xF
 }

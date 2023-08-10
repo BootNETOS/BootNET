@@ -1,12 +1,16 @@
-﻿namespace BootNET.Shell
+﻿namespace BootNET.Shell;
+
+public class Command
 {
-    public class Command
+    public readonly string name;
+
+    public Command(string name)
     {
-        public readonly string name;
-        public Command(string name) { this.name = name; }
-        public virtual string Invoke(string[] args)
-        {
-            return "";
-        }
+        this.name = name;
+    }
+
+    public virtual string Invoke(string[] args)
+    {
+        return "";
     }
 }

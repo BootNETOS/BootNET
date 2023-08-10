@@ -6,7 +6,6 @@ public class Clear : Command
 {
     public Clear(string name) : base(name)
     {
-        
     }
 
     public override string Invoke(string[] args)

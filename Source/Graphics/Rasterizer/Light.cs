@@ -3,14 +3,14 @@ using System.Numerics;
 namespace BootNET.Graphics.Rasterizer;
 
 /// <summary>
-/// The <see cref="Light"/> class, used to represent a light's type, position, rotation, and color.
+///     The <see cref="Light" /> class, used to represent a light's type, position, rotation, and color.
 /// </summary>
 public class Light
 {
     #region Constructors
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Light"/> class.
+    ///     Creates a new instance of the <see cref="Light" /> class.
     /// </summary>
     /// <param name="Position">The position of the light source.</param>
     /// <param name="Rotation">The rotation of the light source.</param>

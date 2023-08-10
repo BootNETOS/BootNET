@@ -1,101 +1,77 @@
-using SConsole = System.Console;
-using GConsole = BootNET.Graphics.Extensions.GraphicalConsole;
 using System;
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
+using SConsole = System.Console;
+using GConsole = BootNET.Graphics.Extensions.GraphicalConsole;
 
-namespace BootNET.Core
+namespace BootNET.Core;
+
+public static class Console
 {
-    public static class Console
+    public static void Initialize()
     {
-        public static void Initialize()
+        try
         {
-            try
-            {
-                GConsole.Initialize(1280, 720);
-            }
-            catch
-            {
-                VGAScreen.SetFont(PCScreenFont.Default.CreateVGAFont(), PCScreenFont.Default.Height);
-            }
+            GConsole.Initialize(1280, 720);
         }
-        public static void Write(string text)
+        catch
         {
-            if (GConsole.Initialized)
-            {
-                GConsole.Write(text);
-            }
-            else
-            {
-                SConsole.Write(text);
-            }
+            VGAScreen.SetFont(PCScreenFont.Default.CreateVGAFont(), PCScreenFont.Default.Height);
         }
-        public static void WriteLine(string text = "")
-        {
-            if (GConsole.Initialized)
-            {
-                GConsole.WriteLine(text);
-            }
-            else
-            {
-                SConsole.WriteLine(text);
-            }
-        }
-        public static string ReadLine()
-        {
-            if (GConsole.Initialized)
-            {
-                return GConsole.ReadLine();
-            }
-            else
-            {
-                return SConsole.ReadLine();
-            }
-        }
-        public static void SetForegroundColor(ConsoleColor color)
-        {
-            if (GConsole.Initialized)
-            {
-                GConsole.ForegroundColor = color;
-            }
-            else
-            {
-                SConsole.ForegroundColor = color;
-            }
-        }
-        public static void SetBackgroundColor(ConsoleColor color)
-        {
-            if (GConsole.Initialized)
-            {
-                GConsole.BackgroundColor = color;
-            }
-            else
-            {
-                SConsole.BackgroundColor = color;
-            }
-        }
-        public static void ResetColor()
-        {
-            if (GConsole.Initialized)
-            {
-                GConsole.ResetColor();
-            }
-            else
-            {
-                SConsole.ResetColor();
-            }
-        }
+    }
 
-        public static void Clear()
-        {
-            if (GConsole.Initialized)
-            {
-                GConsole.Clear();
-            }
-            else
-            {
-                SConsole.Clear();
-            }
-        }
+    public static void Write(string text)
+    {
+        if (GConsole.Initialized)
+            GConsole.Write(text);
+        else
+            SConsole.Write(text);
+    }
+
+    public static void WriteLine(string text = "")
+    {
+        if (GConsole.Initialized)
+            GConsole.WriteLine(text);
+        else
+            SConsole.WriteLine(text);
+    }
+
+    public static string ReadLine()
+    {
+        if (GConsole.Initialized)
+            return GConsole.ReadLine();
+        return SConsole.ReadLine();
+    }
+
+    public static void SetForegroundColor(ConsoleColor color)
+    {
+        if (GConsole.Initialized)
+            GConsole.ForegroundColor = color;
+        else
+            SConsole.ForegroundColor = color;
+    }
+
+    public static void SetBackgroundColor(ConsoleColor color)
+    {
+        if (GConsole.Initialized)
+            GConsole.BackgroundColor = color;
+        else
+            SConsole.BackgroundColor = color;
+    }
+
+    public static void ResetColor()
+    {
+        if (GConsole.Initialized)
+            GConsole.ResetColor();
+        else
+            SConsole.ResetColor();
+    }
+
+    public static void Clear()
+    {
+        if (GConsole.Initialized)
+            GConsole.Clear();
+        else
+            SConsole.Clear();
     }
 }

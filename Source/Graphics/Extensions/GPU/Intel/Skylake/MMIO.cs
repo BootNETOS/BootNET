@@ -5,6 +5,12 @@ namespace BootNET.Graphics.Extensions.GPU.Intel.Skylake;
 
 public class MMIO
 {
+    #region Fields
+
+    public readonly PCIDevice Device;
+
+    #endregion
+
     #region Constructors
 
     public MMIO(PCIDevice Device)
@@ -35,12 +41,6 @@ public class MMIO
     {
         IOPort.Write16((int)(Device.BAR0 + (uint)Unit + Offset), Value);
     }
-
-    #endregion
-
-    #region Fields
-
-    public readonly PCIDevice Device;
 
     #endregion
 }

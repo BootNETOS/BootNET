@@ -1,8 +1,7 @@
-namespace BootNET.Graphics.Extensions.GPU.NVIDIA.Structure.BIT.DAC
+namespace BootNET.Graphics.Extensions.GPU.NVIDIA.Structure.BIT.DAC;
+
+public enum DACFlags
 {
-    public enum DACFlags
-    {
-        NotSupported,
-        Supported,
-    }
+    NotSupported,
+    Supported
 }

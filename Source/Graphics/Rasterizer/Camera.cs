@@ -1,25 +1,25 @@
-using System.Numerics;
 using System;
+using System.Numerics;
 
 namespace BootNET.Graphics.Rasterizer;
 
 /// <summary>
-/// The camera class, only used to represent location and rotation of a camera.
+///     The camera class, only used to represent location and rotation of a camera.
 /// </summary>
 public class Camera
 {
     #region Constructors
 
     /// <summary>
-    /// Creates a new instance of the <see cref="Camera"/> class.
+    ///     Creates a new instance of the <see cref="Camera" /> class.
     /// </summary>
     /// <param name="FOV">The FOV of the camera.</param>
     public Camera(float FOV = 75f)
     {
         MovementSpeed = 10f;
         Sensitivity = .75f;
-        Position = new();
-        Rotation = new();
+        Position = new Vector3();
+        Rotation = new Vector3();
         Ambient = Color.White;
         this.FOV = FOV;
     }
@@ -29,7 +29,7 @@ public class Camera
     #region Methods
 
     /// <summary>
-    /// Gets the rotation Quaternion for the camera projection.
+    ///     Gets the rotation Quaternion for the camera projection.
     /// </summary>
     /// <returns>The rotation Quaternion as specified by the camera's rotation.</returns>
     public Quaternion GetRotationQuaternion()
@@ -38,7 +38,7 @@ public class Camera
     }
 
     /// <summary>
-    /// Gets the mouse to camera movement vector based on mouse inputs.
+    ///     Gets the mouse to camera movement vector based on mouse inputs.
     /// </summary>
     /// <param name="DeltaX">The delta 'X' value of the mouse.</param>
     /// <param name="DeltaY">The delta 'Y' value of the mouse.</param>
@@ -47,11 +47,11 @@ public class Camera
     /// <returns>The rotation axis that the camera should add to.</returns>
     public Vector3 GetRotationAxis(float DeltaX, float DeltaY, ushort Width, ushort Height)
     {
-        return new()
+        return new Vector3
         {
             X = DeltaX != 0 ? -DeltaX * Sensitivity / Width : 0,
             Y = DeltaY != 0 ? DeltaY * Sensitivity / Height : 0,
-            Z = 0,
+            Z = 0
         };
     }
 

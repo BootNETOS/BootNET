@@ -1,18 +1,20 @@
-﻿using Cosmos.System;
+﻿using BootNET.Graphics.Extensions;
 using BootNET.Shell;
+using Cosmos.System;
 
-namespace BootNET.Core
+namespace BootNET.Core;
+
+public class Program : Kernel
 {
-    public class Program : Kernel
-    {
-        protected override void BeforeRun()
-        {
-            BootManager.Boot();
-        }
+    public static Display Canvas { get; set; }
 
-        protected override void Run()
-        {
-            Terminal.Run();
-        }
+    protected override void BeforeRun()
+    {
+        BootManager.Boot();
+    }
+
+    protected override void Run()
+    {
+        Terminal.Run();
     }
 }

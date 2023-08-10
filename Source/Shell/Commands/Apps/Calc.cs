@@ -7,7 +7,6 @@ public class Calc : Command
 {
     public Calc(string name) : base(name)
     {
-        
     }
 
     public override string Invoke(string[] args)
@@ -15,7 +14,7 @@ public class Calc : Command
         string response;
         try
         {
-            if (args[0] != "" & args[1] != "" & args[2] != "" & args.Length == 2)
+            if ((args[0] != "") & (args[1] != "") & (args[2] != ""))
             {
                 int num1 = Convert.ToInt16(args[0]);
                 int num2 = Convert.ToInt16(args[2]);
@@ -39,24 +38,16 @@ public class Calc : Command
                         break;
                     case "=":
                         if (num1 == num2)
-                        {
                             response = "true";
-                        }
                         else
-                        {
                             response = "false";
-                        }
 
                         break;
                     case "!=":
                         if (num1 != num2)
-                        {
                             response = "true";
-                        }
                         else
-                        {
                             response = "false";
-                        }
 
                         break;
                 }
@@ -72,6 +63,7 @@ public class Calc : Command
             Console.SetForegroundColor(ConsoleColor.Red);
             response = "Error: " + ex.Message;
         }
+
         return response;
     }
 }

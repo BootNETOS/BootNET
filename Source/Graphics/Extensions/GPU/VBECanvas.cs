@@ -1,21 +1,21 @@
 using System;
 using Cosmos.Core.Multiboot;
-using Cosmos.Core;
-using Cosmos.System.Graphics;
 
 namespace BootNET.Graphics.Extensions.GPU;
 
 /// <summary>
-/// The VBE canvas extention class.
+///     The VBE canvas extention class.
 /// </summary>
 public unsafe class VBECanvas : Display
 {
     #region Constructors
 
     /// <summary>
-    /// Creates a new instance of the <see cref="VBECanvas"/> class.
+    ///     Creates a new instance of the <see cref="VBECanvas" /> class.
     /// </summary>
-    public VBECanvas() : base((ushort)Multiboot2.Framebuffer->Width, (ushort)Multiboot2.Framebuffer->Height) { }
+    public VBECanvas() : base((ushort)Multiboot2.Framebuffer->Width, (ushort)Multiboot2.Framebuffer->Height)
+    {
+    }
 
     #endregion
 
@@ -27,9 +27,11 @@ public unsafe class VBECanvas : Display
         set => throw new NotSupportedException("VBE does not offer disabling the display at runtime.");
     }
 
-    public new ushort Height => throw new NotSupportedException("VBE does not offer changing the resolution at runtime.");
+    public new ushort Height =>
+        throw new NotSupportedException("VBE does not offer changing the resolution at runtime.");
 
-    public new ushort Width => throw new NotSupportedException("VBE does not offer changing the resolution at runtime.");
+    public new ushort Width =>
+        throw new NotSupportedException("VBE does not offer changing the resolution at runtime.");
 
     #endregion
 
@@ -55,5 +57,6 @@ public unsafe class VBECanvas : Display
         CopyTo((uint*)Multiboot2.Framebuffer->Address);
         _Frames++;
     }
+
     #endregion
 }

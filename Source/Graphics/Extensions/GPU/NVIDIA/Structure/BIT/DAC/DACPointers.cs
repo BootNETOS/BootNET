@@ -1,24 +1,23 @@
-namespace BootNET.Graphics.Extensions.GPU.NVIDIA.Structure.BIT.DAC
+namespace BootNET.Graphics.Extensions.GPU.NVIDIA.Structure.BIT.DAC;
+
+/// <summary>
+///     This data structure contains DAC related data.
+/// </summary>
+public unsafe struct DACPointers
 {
+    #region Properties
+
     /// <summary>
-    /// This data structure contains DAC related data.
+    ///     Checks if DAC sleep is supported.
     /// </summary>
-    public unsafe struct DACPointers
-    {
-        #region Properties
+    public bool IsSleepSupported => 1 == (((byte)Flags >> 0) & 1);
 
-        /// <summary>
-        /// Checks if DAC sleep is supported.
-        /// </summary>
-        public bool IsSleepSupported => 1 == (((byte)Flags >> 0) & 1);
+    #endregion
 
-        #endregion
+    #region Fields
 
-        #region Fields
+    public ushort* Address;
+    public DACFlags Flags;
 
-        public ushort* Address;
-        public DACFlags Flags;
-
-        #endregion
-    }
+    #endregion
 }

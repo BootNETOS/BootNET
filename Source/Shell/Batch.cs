@@ -1,35 +1,33 @@
-﻿using BootNET.Core;
+﻿using System;
 using System.IO;
+using Console = BootNET.Core.Console;
 
-namespace BootNET.Shell
+namespace BootNET.Shell;
+
+public static class Batch
 {
-    public static class Batch
+    public static void Execute(string filename)
     {
-        public static void Execute(string filename)
+        try
         {
-            try
+            if (filename.EndsWith(".bat"))
             {
-                if (filename.EndsWith(".bat"))
-                {
-                    string[] lines = File.ReadAllLines(filename);
-                    foreach (string line in lines)
+                var lines = File.ReadAllLines(filename);
+                foreach (var line in lines)
+                    if (!line.StartsWith(";"))
                     {
-                        if (!(line.StartsWith(";")))
-                        {
-                            string response = Terminal.CommandManager.ProcessInput(line);
-                            BootNET.Core.Console.WriteLine(response);
-                        }
+                        var response = Terminal.CommandManager.ProcessInput(line);
+                        Console.WriteLine(response);
                     }
-                }
-                else
-                {
-                    BootNET.Core.Console.WriteLine("This file is not a valid script.");
-                }
             }
-            catch (System.Exception ex)
+            else
             {
-                BootNET.Core.Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("This file is not a valid script.");
             }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
         }
     }
 }
