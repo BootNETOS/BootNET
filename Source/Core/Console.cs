@@ -97,10 +97,5 @@ namespace BootNET.Core
                 SConsole.Clear();
             }
         }
-
-        public static void SetCursorPosition(int x, int y)
-        {
-            SConsole.SetCursorPosition(x, y);
-        }
     }
 }

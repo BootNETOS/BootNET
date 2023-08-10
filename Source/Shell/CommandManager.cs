@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using BootNET.Shell.Commands;
+using BootNET.Shell.Commands.Apps;
+using BootNET.Shell.Commands.Terminal;
 
 namespace BootNET.Shell
 {
@@ -18,11 +20,8 @@ namespace BootNET.Shell
             this.commands = new()
             {
                 new(""),
-                new WriteRd("writerd"),
-                new ReadRd("readrd"),
-                new LsRd("lsrd"),
-                new DelRd("delrd"),
-                new FormatRd("formatrd")
+                new Calc("calc"),
+                new Clear("clear")
             };
         }
         #endregion

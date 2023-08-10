@@ -35,7 +35,6 @@ namespace BootNET.Filesystem
 
         #region Fields
         public static CosmosVFS VFS { get; set; }
-        public static Ramdisk RamDisk { get; set; }
         #endregion
     }
 }
