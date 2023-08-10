@@ -1,97 +1,96 @@
 using System;
 using System.Collections.Generic;
 
-namespace BootNET.Core.Coroutines
+namespace BootNET.Core.Coroutines;
+
+/// <summary>
+///     Represents a coroutine, that generalizes subroutines for non-preemptive multitasking, by allowing execution to be
+///     suspended and resumed.
+/// </summary>
+public class Coroutine
 {
+    private readonly IEnumerator<CoroutineControlPoint?> executor;
+
     /// <summary>
-    /// Represents a coroutine, that generalizes subroutines for non-preemptive multitasking, by allowing execution to be suspended and resumed.
+    ///     Initializes a new instance of the <see cref="Coroutine" /> class,
+    ///     with the given coroutine executor, without starting the coroutine.
     /// </summary>
-    public class Coroutine
+    /// <param name="executor">The executor to call.</param>
+    public Coroutine(IEnumerator<CoroutineControlPoint?> executor)
     {
-        readonly IEnumerator<CoroutineControlPoint?> executor;
+        this.executor = executor;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Coroutine"/> class,
-        /// with the given coroutine executor, without starting the coroutine.
-        /// </summary>
-        /// <param name="executor">The executor to call.</param>
-        public Coroutine(IEnumerator<CoroutineControlPoint?> executor)
-        {
-            this.executor = executor;
-        }
+    /// <summary>
+    ///     Returns the current control point of the coroutine.
+    /// </summary>
+    public CoroutineControlPoint? CurrentControlPoint => executor.Current;
 
-        internal void Join(CoroutinePool pool)
-        {
-            Pool = pool;
-        }
+    /// <summary>
+    ///     Whether the coroutine is attached to a coroutine pool and is running.
+    /// </summary>
+    public bool Running { get; internal set; }
 
-        internal void Exit()
-        {
-            Pool = null;
-        }
+    /// <summary>
+    ///     Whether the coroutine is currently halted.
+    /// </summary>
+    public bool Halted { get; set; } = false;
 
-        internal void Step()
-        {
-            ExecutionEnded = !executor.MoveNext();
-        }
+    /// <summary>
+    ///     Gets the pool that this <see cref="Coroutine" /> belongs to.
+    /// </summary>
+    public CoroutinePool? Pool { get; private set; }
 
-        /// <summary>
-        /// Starts the execution of this coroutine on the set coroutine pool. If no coroutine pool is set and <param name="autoJoin"/> is true, the coroutine will be joined to the global main coroutine pool.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Thrown when an attempt is made to start the coroutine while it's already running.</exception>
-        /// <param name="autoJoin">If false will not auto join main pool.</param>
-        public void Start(bool autoJoin = true)
-        {
-            if(Running) {
-                throw new InvalidOperationException("Cannot start an already running Coroutine.");
-            }
+    /// <summary>
+    ///     Whether the execution of the coroutine has ended and no more
+    ///     instructions can be performed.
+    /// </summary>
+    public bool ExecutionEnded { get; private set; }
 
-            if (autoJoin && Pool == null)
-            {
-                CoroutinePool.Main.AddCoroutine(this);
-            }
+    internal void Join(CoroutinePool pool)
+    {
+        Pool = pool;
+    }
 
-            if (Pool == null)
-            {
-                throw new InvalidOperationException("Cannot start the execution of the Coroutine on a set pool, with the Pool property being set to null.");
-            }
+    internal void Exit()
+    {
+        Pool = null;
+    }
 
-            Running = true;
-        }
+    internal void Step()
+    {
+        ExecutionEnded = !executor.MoveNext();
+    }
 
-        /// <summary>
-        /// Stops this coroutine.
-        /// </summary>
-        public void Stop()
-        {
-            Pool?.RemoveCoroutine(this);
-            Exit();
-        }
+    /// <summary>
+    ///     Starts the execution of this coroutine on the set coroutine pool. If no coroutine pool is set and
+    ///     <param name="autoJoin" />
+    ///     is true, the coroutine will be joined to the global main coroutine pool.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">
+    ///     Thrown when an attempt is made to start the coroutine while it's already
+    ///     running.
+    /// </exception>
+    /// <param name="autoJoin">If false will not auto join main pool.</param>
+    public void Start(bool autoJoin = true)
+    {
+        if (Running) throw new InvalidOperationException("Cannot start an already running Coroutine.");
 
-        /// <summary>
-        /// Returns the current control point of the coroutine.
-        /// </summary>
-        public CoroutineControlPoint? CurrentControlPoint => executor.Current;
+        if (autoJoin && Pool == null) CoroutinePool.Main.AddCoroutine(this);
 
-        /// <summary>
-        /// Whether the coroutine is attached to a coroutine pool and is running.
-        /// </summary>
-        public bool Running { get; internal set; }
+        if (Pool == null)
+            throw new InvalidOperationException(
+                "Cannot start the execution of the Coroutine on a set pool, with the Pool property being set to null.");
 
-        /// <summary>
-        /// Whether the coroutine is currently halted.
-        /// </summary>
-        public bool Halted { get; set; } = false;
+        Running = true;
+    }
 
-        /// <summary>
-        /// Gets the pool that this <see cref="Coroutine"/> belongs to.
-        /// </summary>
-        public CoroutinePool? Pool { get; private set; }
-
-        /// <summary>
-        /// Whether the execution of the coroutine has ended and no more
-        /// instructions can be performed.
-        /// </summary>
-        public bool ExecutionEnded { get; private set; }
+    /// <summary>
+    ///     Stops this coroutine.
+    /// </summary>
+    public void Stop()
+    {
+        Pool?.RemoveCoroutine(this);
+        Exit();
     }
 }

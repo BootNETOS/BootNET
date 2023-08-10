@@ -1,31 +1,30 @@
 ﻿using BootNET.Network.SimpleHttpServer.Models;
 
-namespace BootNET.Network.SimpleHttpServer
+namespace BootNET.Network.SimpleHttpServer;
+
+internal class HttpBuilder
 {
-    class HttpBuilder
+    public static HttpResponse InternalServerError()
     {
-        public static HttpResponse InternalServerError()
+        var content = "<h1>500 Internal Server Error</h1><a href=\"http://141.94.79.247\">Back to home page</a>";
+
+        return new HttpResponse
         {
-            string content = "<h1>500 Internal Server Error</h1><a href=\"http://141.94.79.247\">Back to home page</a>";
+            ReasonPhrase = "InternalServerError",
+            StatusCode = "500",
+            ContentAsUTF8 = content
+        };
+    }
 
-            return new HttpResponse()
-            {
-                ReasonPhrase = "InternalServerError",
-                StatusCode = "500",
-                ContentAsUTF8 = content
-            };
-        }
+    public static HttpResponse NotFound()
+    {
+        var content = "<h1>404 Not Found</h1><a href=\"http://141.94.79.247\">Back to home page</a>";
 
-        public static HttpResponse NotFound()
+        return new HttpResponse
         {
-            string content = "<h1>404 Not Found</h1><a href=\"http://141.94.79.247\">Back to home page</a>";
-
-            return new HttpResponse()
-            {
-                ReasonPhrase = "NotFound",
-                StatusCode = "404",
-                ContentAsUTF8 = content
-            };
-        }
+            ReasonPhrase = "NotFound",
+            StatusCode = "404",
+            ContentAsUTF8 = content
+        };
     }
 }

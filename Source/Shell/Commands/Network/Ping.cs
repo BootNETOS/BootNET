@@ -8,7 +8,6 @@ public class Ping : Command
 {
     public Ping(string name) : base(name)
     {
-        
     }
 
     public override string Invoke(string[] args)
@@ -20,7 +19,7 @@ public class Ping : Command
         catch (Exception ex)
         {
             Console.SetForegroundColor(ConsoleColor.Red);
-            Console.WriteLine("Error: "+ ex.Message);
+            Console.WriteLine("Error: " + ex.Message);
         }
 
         return "";
