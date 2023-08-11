@@ -35,8 +35,13 @@ public class CommandManager
             new Ping("ping"),
             new HttpServerStart("httpserver"),
             new FtpServerStart("ftpserver"),
+            new VFSInitialize("initvfs"),
             new Format("format"),
-            new VFSInitialize("initvfs")
+            new TouchPart("touchpart"),
+            new ClearDisk("cleardisk"),
+            new Touch("touch"),
+            new Ls("ls"),
+            new Ls("dir")
         };
     }
 

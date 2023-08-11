@@ -1,26 +1,34 @@
-using System;
 using System.IO;
 using Console = BootNET.Core.Console;
+using System;
 
 namespace BootNET.Shell.Commands.Filesystem;
 
-public class Touch : Command
+public class Ls : Command
 {
-    public Touch(string name) : base(name)
+    public Ls(string name) : base(name)
     {
         
     }
 
     public override string Invoke(string[] args)
     {
-        string response;
+        string response = string.Empty;
         try
         {
             if (args[0] != "")
             {
-                File.Create(args[0]);
-                Console.SetForegroundColor(ConsoleColor.Green);
-                response = "File created successfully!";
+                response += "Directories: \n";
+                foreach (var dir in Directory.GetDirectories(args[0]))
+                {
+                    response += dir + "\n";
+                }
+
+                response += "Files: \n";
+                foreach (var file in Directory.GetFiles(args[0]))
+                {
+                    response += file + "\n";
+                }
             }
             else
             {
