@@ -1,5 +1,4 @@
-﻿using BootNET.Core;
-using Cosmos.System.FileSystem;
+﻿using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
 
 namespace BootNET.Filesystem;
@@ -47,7 +46,8 @@ public class FilesystemManager
     public static void FormatPartition(int disk = 0, int partition = 1, string format = "FAT32", bool quick = true)
     {
         var SelectedDisk = VFS.Disks[disk];
-        SelectedDisk.FormatPartition(partition,format, quick);
+        SelectedDisk.FormatPartition(partition, format, quick);
     }
+
     #endregion
 }

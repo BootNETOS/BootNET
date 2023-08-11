@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using BootNET.Shell.Commands.Apps;
-using BootNET.Shell.Commands.Filesystem;
 using BootNET.Shell.Commands.Network;
 using BootNET.Shell.Commands.Terminal;
 using Console = BootNET.Core.Console;
@@ -33,15 +32,7 @@ public class CommandManager
             new Clear("clear"),
             new Echo("echo"),
             new Ping("ping"),
-            new HttpServerStart("httpserver"),
-            new FtpServerStart("ftpserver"),
-            new VFSInitialize("initvfs"),
-            new Format("format"),
-            new TouchPart("touchpart"),
-            new ClearDisk("cleardisk"),
-            new Touch("touch"),
-            new Ls("ls"),
-            new Ls("dir")
+            new HttpServerStart("httpserver")
         };
     }
 

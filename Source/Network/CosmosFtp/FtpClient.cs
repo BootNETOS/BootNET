@@ -1,96 +1,93 @@
+using System.Text;
 using Cosmos.System.Network.IPv4;
 using Cosmos.System.Network.IPv4.TCP;
-using System.Text;
 
-namespace BootNET.Network.CosmosFtp
+namespace BootNET.Network.CosmosFtp;
+
+/// <summary>
+///     FtpClient class.
+/// </summary>
+internal class FtpClient
 {
     /// <summary>
-    /// FtpClient class.
+    ///     Create new instance of the <see cref="FtpClient" /> class.
     /// </summary>
-    internal class FtpClient
+    /// <param name="client">TcpClient used for control connection.</param>
+    internal FtpClient(TcpClient client)
     {
-        /// <summary>
-        /// Client IP Address.
-        /// </summary>
-        internal Address Address { get; set; }
+        Control = client;
+        Connected = false;
+        Mode = TransferMode.NONE;
+    }
 
-        /// <summary>
-        /// Client TCP Port.
-        /// </summary>
-        internal int Port { get; set; }
+    /// <summary>
+    ///     Client IP Address.
+    /// </summary>
+    internal Address Address { get; set; }
 
-        /// <summary>
-        /// TCP Control Client. Used to send commands.
-        /// </summary>
-        internal TcpClient Control { get; set; }
+    /// <summary>
+    ///     Client TCP Port.
+    /// </summary>
+    internal int Port { get; set; }
 
-        /// <summary>
-        /// TCP Data Transfer Client. Used to transfer data.
-        /// </summary>
-        internal TcpClient Data { get; set; }
+    /// <summary>
+    ///     TCP Control Client. Used to send commands.
+    /// </summary>
+    internal TcpClient Control { get; set; }
 
-        /// <summary>
-        /// TCP Data Transfer Listener. Used in PASV mode.
-        /// </summary>
-        internal TcpListener DataListener { get; set; }
+    /// <summary>
+    ///     TCP Data Transfer Client. Used to transfer data.
+    /// </summary>
+    internal TcpClient Data { get; set; }
 
-        /// <summary>
-        /// FTP client data transfer mode.
-        /// </summary>
-        internal TransferMode Mode { get; set; }
+    /// <summary>
+    ///     TCP Data Transfer Listener. Used in PASV mode.
+    /// </summary>
+    internal TcpListener DataListener { get; set; }
 
-        /// <summary>
-        /// FTP client username.
-        /// </summary>
-        internal string Username { get; set; }
+    /// <summary>
+    ///     FTP client data transfer mode.
+    /// </summary>
+    internal TransferMode Mode { get; set; }
 
-        /// <summary>
-        /// FTP client password.
-        /// </summary>
-        internal string Password { get; set; }
+    /// <summary>
+    ///     FTP client username.
+    /// </summary>
+    internal string Username { get; set; }
 
-        /// <summary>
-        /// Is user connected.
-        /// </summary>
-        internal bool Connected { get; set; }
+    /// <summary>
+    ///     FTP client password.
+    /// </summary>
+    internal string Password { get; set; }
 
-        /// <summary>
-        /// Create new instance of the <see cref="FtpClient"/> class.
-        /// </summary>
-        /// <param name="client">TcpClient used for control connection.</param>
-        internal FtpClient(TcpClient client)
+    /// <summary>
+    ///     Is user connected.
+    /// </summary>
+    internal bool Connected { get; set; }
+
+    /// <summary>
+    ///     Is user connected.
+    /// </summary>
+    /// <returns>Boolean value.</returns>
+    internal bool IsConnected()
+    {
+        if (Connected == false)
         {
-            Control = client;
-            Connected = false;
-            Mode = TransferMode.NONE;
+            SendReply(530, "Login incorrect.");
+            return Connected;
         }
 
-        /// <summary>
-        /// Is user connected.
-        /// </summary>
-        /// <returns>Boolean value.</returns>
-        internal bool IsConnected()
-        {
-            if (Connected == false)
-            {
-                SendReply(530, "Login incorrect.");
-                return Connected;
-            }
-            else
-            {
-                return Connected;
-            }
-        }
+        return Connected;
+    }
 
-        /// <summary>
-        /// Send text to control socket (usually port 21)
-        /// </summary>
-        /// <param name="code">Reply code.</param>
-        /// <param name="command">Reply content.</param>
-        internal void SendReply(int code, string message)
-        {
-            message = message.Replace('\\', '/');
-            Control.Send(Encoding.ASCII.GetBytes(code + " " + message + "\r\n"));
-        }
+    /// <summary>
+    ///     Send text to control socket (usually port 21)
+    /// </summary>
+    /// <param name="code">Reply code.</param>
+    /// <param name="command">Reply content.</param>
+    internal void SendReply(int code, string message)
+    {
+        message = message.Replace('\\', '/');
+        Control.Send(Encoding.ASCII.GetBytes(code + " " + message + "\r\n"));
     }
 }
