@@ -6,8 +6,8 @@ namespace BootNET.Core;
 
 public class Program : Kernel
 {
-    public static Display Canvas { get; set; }
     public static bool TerminalMode = true;
+    public static Display Canvas { get; set; }
 
     protected override void BeforeRun()
     {
@@ -19,10 +19,6 @@ public class Program : Kernel
         if (TerminalMode)
         {
             Terminal.Run();
-        }
-        else
-        {
-            
         }
     }
 }

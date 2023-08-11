@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BootNET.Shell.Commands.Apps;
 using BootNET.Shell.Commands.Network;
+using BootNET.Shell.Commands.Power;
 using BootNET.Shell.Commands.Terminal;
 using Console = BootNET.Core.Console;
 
@@ -32,7 +33,9 @@ public class CommandManager
             new Clear("clear"),
             new Echo("echo"),
             new Ping("ping"),
-            new HttpServerStart("httpserver")
+            new HttpServerStart("httpserver"),
+            new Shutdown("shutdown"),
+            new Reboot("reboot")
         };
     }
 
