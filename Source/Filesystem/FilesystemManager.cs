@@ -1,4 +1,5 @@
-﻿using Cosmos.System.FileSystem;
+﻿using BootNET.Core;
+using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
 
 namespace BootNET.Filesystem;
@@ -28,17 +29,25 @@ public class FilesystemManager
     }
 
     /// <summary>
-    ///     Format
+    ///     Clear
     /// </summary>
     /// <param name="disk">Disk number, if you have only one disk put nothing.</param>
-    public static void Format(int disk = 0)
+    public static void Clear(int disk = 0)
     {
         var SelectedDisk = VFS.Disks[disk];
         SelectedDisk.Clear();
-        SelectedDisk.CreatePartition(512);
-        SelectedDisk.CreatePartition((SelectedDisk.Size - 512) / 1048576);
-        SelectedDisk.FormatPartition(1, "FAT32");
     }
 
+    public static void CreatePartition(int size, int disk = 0)
+    {
+        var SelectedDisk = VFS.Disks[disk];
+        SelectedDisk.CreatePartition(size);
+    }
+
+    public static void FormatPartition(int disk = 0, int partition = 1, string format = "FAT32", bool quick = true)
+    {
+        var SelectedDisk = VFS.Disks[disk];
+        SelectedDisk.FormatPartition(partition,format, quick);
+    }
     #endregion
 }

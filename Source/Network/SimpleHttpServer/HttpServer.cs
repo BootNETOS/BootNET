@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BootNET.Core;
 using BootNET.Network.SimpleHttpServer.Models;
+using Cosmos.System.Network.Config;
 using Cosmos.System.Network.IPv4.TCP;
 
 namespace BootNET.Network.SimpleHttpServer;
@@ -31,7 +32,7 @@ public class HttpServer
         Listener = new TcpListener((ushort)Port);
         Listener.Start();
 
-        Console.WriteLine("HTTP Server Listening on port 80...");
+        Console.WriteLine("HTTP Server Listening on " + NetworkConfiguration.CurrentAddress + ":80");
 
         while (IsActive)
             try

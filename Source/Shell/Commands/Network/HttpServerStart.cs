@@ -15,28 +15,20 @@ public class HttpServerStart : Command
 
     public override string Invoke(string[] args)
     {
-        return "";
-    }
-
-    public void Listen()
-    {
         try
         {
-            var route_config = new List<Route>
-            {
-                new()
-                {
+            var route_config = new List<Route>() {
+                new Route {
                     Name = "Hello Handler",
                     Method = "GET",
                     Url = "/",
-                    Callable = result =>
-                    {
-                        result.Response = new HttpResponse
+                    Callable = (HttpDiscussion result) => {
+                        result.Response = new HttpResponse()
                         {
                             Content = Encoding.ASCII.GetBytes(@"<html>" +
-                                                              "\t<h1>Hello from <a href=\"https://github.com/aura-systems/Aura-Operating-System\">AuraOS</a>!</h1>" +
+                                                              "\t<h1>Hello from <a href=\"https://github.com/BootNETOS\">BootNET</a>!</h1>" +
                                                               "\t<p>Version: " + 0 + "." + 0 + "</p>" +
-                                                              "\t<p>Server Hour: " + DateTime.Now + "</p>" +
+                                                              "\t<p>Server Hour: " + DateTime.Now.ToString() + "</p>" +
                                                               "\t<p>Server Boot Time: " + 0 + "</p>" +
                                                               "\t<p>Powered by <a href=\"https://github.com/CosmosOS/Cosmos\">Cosmos</a>.</p>" +
                                                               "</html>"),
@@ -52,7 +44,9 @@ public class HttpServerStart : Command
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            Console.SetForegroundColor(ConsoleColor.Red);
+            Console.WriteLine(ex.Message);
         }
+        return "";
     }
 }

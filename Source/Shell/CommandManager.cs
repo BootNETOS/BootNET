@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using BootNET.Shell.Commands.Apps;
+using BootNET.Shell.Commands.Filesystem;
 using BootNET.Shell.Commands.Network;
 using BootNET.Shell.Commands.Terminal;
+using Console = BootNET.Core.Console;
 
 namespace BootNET.Shell;
 
@@ -30,7 +32,11 @@ public class CommandManager
             new Calc("calc"),
             new Clear("clear"),
             new Echo("echo"),
-            new Ping("ping")
+            new Ping("ping"),
+            new HttpServerStart("httpserver"),
+            new FtpServerStart("ftpserver"),
+            new Format("format"),
+            new VFSInitialize("initvfs")
         };
     }
 
@@ -61,7 +67,7 @@ public class CommandManager
         foreach (var cmd in commands)
             if (cmd.name == label)
                 return cmd.Invoke(args.ToArray());
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.SetForegroundColor(ConsoleColor.Red);
         return "Command \"" + label + "\" not found.";
     }
 
