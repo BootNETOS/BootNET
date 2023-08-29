@@ -23,19 +23,24 @@
         <Timeout>5</Timeout>
         <DebugEnabled>False</DebugEnabled>
         <VMWareEdition>Player</VMWareEdition>
+        <CompileVBEMultiboot>True</CompileVBEMultiboot>
+        <VBEResolution></VBEResolution>
     </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Media\BootLogo.bmp" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Media\BootLogo.bmp" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
-    </ItemGroup>
-
-
-    <ItemGroup>
-        <None Remove="Resources\BootLogo.bmp"/>
-        <EmbeddedResource Include="Resources\BootLogo.bmp"/>
+        <PackageReference Include="PrismAPI" Version="1.0.3" />
     </ItemGroup>
 
 

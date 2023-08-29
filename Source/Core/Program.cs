@@ -1,24 +1,29 @@
-﻿using BootNET.Graphics.Extensions;
-using BootNET.Shell;
+﻿using BootNET.Audio;
+using BootNET.Network;
 using Cosmos.System;
+using PrismAPI.Hardware.GPU;
 
-namespace BootNET.Core;
-
-public class Program : Kernel
+namespace BootNET.Core
 {
-    public static bool TerminalMode = true;
-    public static Display Canvas { get; set; }
-
-    protected override void BeforeRun()
+    public class Program : Kernel
     {
-        BootManager.Boot();
-    }
-
-    protected override void Run()
-    {
-        if (TerminalMode)
+        public static Display Canvas;
+        protected override void BeforeRun()
         {
-            Terminal.Run();
+            Canvas = Display.GetDisplay(1280, 720);
+            BootManager.Show(Canvas);
+            try
+            {
+                AudioManager.Initialize();
+                NetworkManager.Initialize();
+            }
+            catch { }
+            BootManager.Hide();
+            Canvas.Update();
+        }
+        protected override void Run()
+        {
+
         }
     }
 }

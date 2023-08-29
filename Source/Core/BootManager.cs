@@ -1,84 +1,69 @@
-﻿using System;
-using BootNET.Audio;
-using BootNET.Graphics;
-using BootNET.Graphics.Extensions;
-using BootNET.Network;
-using Cosmos.System;
-using Cosmos.System.Network.IPv4;
-using IL2CPU.API.Attribs;
+﻿using PrismAPI.Graphics;
+using PrismAPI.Graphics.Animation;
+using PrismAPI.Hardware.GPU;
+using System.Threading;
 
-namespace BootNET.Core;
-
-public static class BootManager
+namespace BootNET.Core
 {
-    [ManifestResourceStream(ResourceName = "BootNET.Resources.BootLogo.bmp")]
-    public static byte[] bootLogo;
-
-    public static Canvas BootLogo = Image.FromBitmap(bootLogo);
-
-    /// <summary>
-    ///     Boot the system.
-    /// </summary>
-    public static void Boot()
+    public static class BootManager
     {
-        Console.WriteLine("Initializing Console...");
-        try
+        private static readonly AnimationController A;
+        private static readonly AnimationController B;
+        private static readonly ColorController C;
+        private static Display Canvas = null!;
+        private static bool IsEnabled;
+        private static bool IsSetup;
+        static BootManager()
         {
-            Console.Initialize();
+            A = new(25f, 270f, new(0, 0, 0, 0, 750), AnimationMode.Ease);
+            B = new(0f, 360f, new(0, 0, 0, 0, 500), AnimationMode.Linear);
+            C = new(Color.Transparent, Color.Black, new(0, 0, 0, 0, 500), AnimationMode.Ease);
+            A.IsContinuous = true;
         }
-        catch (Exception ex)
+        private static void Update()
         {
-            ErrorScreen("Error while initializing Console: " + ex.Message);
+            if (B.IsFinished)
+            {
+                B.Reset();
+            }
+
+            ushort H3 = (ushort)(Canvas.Height / 3);
+            ushort W2 = (ushort)(Canvas.Width / 2);
+            ushort H2 = (ushort)(Canvas.Height / 2);
+
+            Canvas.Clear();
+            Canvas.DrawImage(W2 - (Resources.BootLogo.Width / 2), H2 - (Resources.BootLogo.Height / 2), Resources.BootLogo, false);
+
+            int LengthOffset = (int)(B.Current + A.Current);
+            int Offset = (int)B.Current;
+
+            Canvas.DrawArc(W2, H2 + (H2 / 2) + (H3 / 2), 19, Color.LightGray, Offset, LengthOffset);
+            Canvas.DrawArc(W2, H2 + (H2 / 2) + (H3 / 2), 20, Color.White, Offset, LengthOffset);
+            Canvas.DrawArc(W2, H2 + (H2 / 2) + (H3 / 2), 21, Color.LightGray, Offset, LengthOffset);
+            Canvas.Update();
         }
 
-        try
+        public static void Show(Display Canvas)
         {
-            NetworkManager.Initialize(new Address(1, 1, 1, 1));
-        }
-        catch (Exception ex)
-        {
-            Console.SetForegroundColor(ConsoleColor.Yellow);
-            Console.WriteLine("Network not connected: " + ex.Message);
-            Console.SetForegroundColor(ConsoleColor.White);
+            if (IsSetup)
+            {
+                IsEnabled = true;
+                return;
+            }
+
+            // Assign the canvas instance.
+            BootManager.Canvas = Canvas;
+
+            // Add a timer to update the screen while booting.
+            Timer T = new((_) => { if (IsEnabled) { Update(); } }, null, 55, 0);
+            IsEnabled = true;
+            IsSetup = true;
         }
 
-        try
+        public static void Hide()
         {
-            SoundManager.Initialize();
+            IsEnabled = false;
+            C.Reset();
         }
-        catch (Exception ex)
-        {
-            Console.SetForegroundColor(ConsoleColor.Yellow);
-            Console.WriteLine("Sound disabled: " + ex.Message);
-            Console.SetForegroundColor(ConsoleColor.White);
-        }
-
-        if (GraphicalConsole.Initialized)
-        {
-            Program.Canvas.DrawImage(0, GraphicalConsole.Y + 1, BootLogo, false);
-            GraphicalConsole.Y += 101;
-        }
-        else
-        {
-            Console.SetForegroundColor(ConsoleColor.DarkMagenta);
-            Console.WriteLine("Welcome to BootNET!");
-        }
-
-        Console.WriteLine();
-    }
-
-    /// <summary>
-    ///     Print error screen.
-    /// </summary>
-    /// <param name="message">Message to print.</param>
-    public static void ErrorScreen(string message)
-    {
-        Console.ResetColor();
-        Console.SetForegroundColor(ConsoleColor.Red);
-        Console.WriteLine("Error: " + message);
-        Console.WriteLine("If it's the first time happening please read documentation on GitHub.");
-        Console.WriteLine("Press enter key to reboot...");
-        Console.ReadLine();
-        Power.Reboot();
     }
 }
