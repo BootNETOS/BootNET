@@ -1,4 +1,5 @@
 ﻿using BootNET.Audio;
+using BootNET.GUI;
 using BootNET.Network;
 using Cosmos.System;
 using PrismAPI.Hardware.GPU;
@@ -20,10 +21,11 @@ namespace BootNET.Core
             catch { }
             BootManager.Hide();
             Canvas.Update();
+            WindowManager.Start();
         }
         protected override void Run()
         {
-
+            WindowManager.Update();
         }
     }
 }

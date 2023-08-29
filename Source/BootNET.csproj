@@ -28,11 +28,28 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Media\Background.bmp" />
       <None Remove="Media\BootLogo.bmp" />
+      <None Remove="Media\Busy.bmp" />
+      <None Remove="Media\Link.bmp" />
+      <None Remove="Media\Mouse.bmp" />
+      <None Remove="Media\MouseDrag.bmp" />
+      <None Remove="Media\MouseText.bmp" />
+      <None Remove="Media\power.bmp" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Media\Background.bmp" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="Media\BootLogo.bmp" />
+      <EmbeddedResource Include="Media\Busy.bmp" />
+      <EmbeddedResource Include="Media\Link.bmp" />
+      <EmbeddedResource Include="Media\Mouse.bmp" />
+      <EmbeddedResource Include="Media\MouseDrag.bmp" />
+      <EmbeddedResource Include="Media\MouseText.bmp" />
+      <EmbeddedResource Include="Media\power.bmp" />
     </ItemGroup>
 
     <ItemGroup>

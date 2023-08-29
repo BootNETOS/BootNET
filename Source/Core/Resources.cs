@@ -17,12 +17,18 @@ namespace BootNET.Core
         private readonly static byte[] rawLink;
         [ManifestResourceStream(ResourceName = "BootNET.Media.Busy.bmp")]
         private readonly static byte[] rawBusy;
+        [ManifestResourceStream(ResourceName = "BootNET.Media.Background.bmp")]
+        private readonly static byte[] rawBackground;
+        [ManifestResourceStream(ResourceName = "BootNET.Media.power.bmp")]
+        private readonly static byte[] rawPower;
         public static Canvas BootLogo = Image.FromBitmap(rawBootLogo);
         public static Canvas Mouse = Image.FromBitmap(rawMouse);
         public static Canvas MouseDrag = Image.FromBitmap(rawMouseDrag);
         public static Canvas MouseText = Image.FromBitmap(rawMouseText);
         public static Canvas Link = Image.FromBitmap(rawLink);
         public static Canvas Busy = Image.FromBitmap(rawBusy);
+        public static Canvas Background = Image.FromBitmap(rawBackground);
+        public static Canvas Power = Image.FromBitmap(rawPower);
         
     }
 }

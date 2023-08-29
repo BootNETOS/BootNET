@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using BootNET.Core;
+using BootNET.GUI.Apps.Core;
 using Cosmos.Core.Memory;
 using Cosmos.System;
 using PrismAPI.Graphics.Fonts;
@@ -60,6 +61,7 @@ namespace BootNET.GUI
         public static void Start()
         {
             AddWindow(new Desktop());
+            CursorManager.Initialize();
         }
 
         public static void Update()
@@ -89,7 +91,7 @@ namespace BootNET.GUI
                     Windows[^1].HandleKey(key);
                 }
             }
-
+            CursorManager.Update();
 #if SHOW_FPS
             Canvas.DrawString(2, 22, $"{Canvas.GetFPS()} FPS", Font.Fallback, PrismAPI.Graphics.Color.Black);
 #endif
