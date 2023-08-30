@@ -1,9 +1,12 @@
-﻿using System;
-using BootNET.Core;
+﻿using BootNET.Core;
 using Cosmos.HAL;
 using Cosmos.System;
+using Cosmos.System.Network.Config;
+using Cosmos.System.Network.IPv4;
+using Cosmos.System.Network.IPv4.UDP.DNS;
 using PrismAPI.Graphics;
 using PrismAPI.Graphics.Fonts;
+using System;
 
 namespace BootNET.GUI.Apps.Core
 {
@@ -23,21 +26,16 @@ namespace BootNET.GUI.Apps.Core
         {
             ClockString = DateTime.Now.ToString("ddd M HH:mm");
             Contents.DrawFilledRectangle(0, 0, Width, 24, 0, TaskbarColor);
-            Contents.DrawString(2, 2, "Applications",Font.Fallback,Color.White);
+            Contents.DrawString(2, 2, "Applications", Font.Fallback, Color.White);
             Contents.DrawString(ClockPosition, 2, ClockString, Font.Fallback, Color.White);
             Contents.DrawImage(ShutdownPosition, 0, Resources.Power);
-            if(MouseManager.X >= ShutdownPosition & MouseManager.X <= Width & MouseManager.Y >= 0 & MouseManager.Y <= 24)
-            {
-                Cosmos.System.Power.Shutdown();
-            }
         }
-
         public override void Update()
         {
             if (BackgroundChangeRequest)
             {
                 for (int y = 20; y < Program.Canvas.Height; y += Resources.Background.Height)
-                    for (int x = 0; x < Program.Canvas.Width; x += Resources.Background.Width) // Tiling background image
+                    for (int x = 0; x < Program.Canvas.Width; x += Resources.Background.Width)
                         Contents.DrawImage(x, y, BackgroundImage, false);
 
                 BackgroundChangeRequest = false;
@@ -48,6 +46,10 @@ namespace BootNET.GUI.Apps.Core
 
             if (WindowManager.FocusedWindow != WindowManager.LastFocusedWindow)
                 Render();
+            if (MouseManager.X >= ShutdownPosition & MouseManager.X <= WindowManager.Canvas.Width & MouseManager.Y >= 0 & MouseManager.Y <= 24)
+            {
+                Cosmos.System.Power.Shutdown();
+            }
         }
     }
 }
