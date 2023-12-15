@@ -1,4 +1,0 @@
-﻿[*.cs]
-
-# CS0649: Non è possibile assegnare un valore diverso al campo 'Resources.rawBootLogo'. Il valore predefinito è null
-dotnet_diagnostic.CS0649.severity = none
