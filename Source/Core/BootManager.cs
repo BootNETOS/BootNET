@@ -11,6 +11,8 @@ namespace BootNET.Core
 {
     public static class BootManager
     {
+        public static AC97 AudioDriver;
+        public static CosmosVFS FilesystemDriver = new();
         public static void Boot()
         {
             //Setting VGA Font
@@ -36,8 +38,7 @@ namespace BootNET.Core
             }
             try
             {
-                CosmosVFS fs = new();
-                VFSManager.RegisterVFS(fs, false);
+                VFSManager.RegisterVFS(FilesystemDriver, false);
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Filesystem enabled");
                 Console.ResetColor();
@@ -50,7 +51,7 @@ namespace BootNET.Core
             }
             try
             {
-                AC97.Initialize(bufferSize: 4096);
+                AudioDriver = AC97.Initialize(bufferSize: 4096);
             }
             catch (Exception ex)
             {
