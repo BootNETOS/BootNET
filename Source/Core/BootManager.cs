@@ -13,6 +13,7 @@ namespace BootNET.Core
     {
         public static AC97 AudioDriver;
         public static CosmosVFS FilesystemDriver = new();
+        public static bool FilesystemEnabled = false;
         public static void Boot()
         {
             //Setting VGA Font
@@ -42,12 +43,14 @@ namespace BootNET.Core
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Filesystem enabled");
                 Console.ResetColor();
+                FilesystemEnabled = true;
             }
             catch(Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Filesystem disabled: " + ex.Message);
                 Console.ResetColor();
+                FilesystemEnabled = false;
             }
             try
             {
