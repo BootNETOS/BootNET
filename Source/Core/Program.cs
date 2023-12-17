@@ -8,18 +8,20 @@ namespace BootNET.Core
     {
         public static string Username;
         public static bool LoggedIn = false;
-        public static CommandManager CommandManager = new();
+        public static CommandManager commandManager = new();
         public static string CurrentDirectory = "0:\\";
         protected override void BeforeRun()
         {
             BootManager.Boot();
-            CommandManager.RegisterCommand();
         }
         protected override void Run()
         {
-            if(LoggedIn)
+            if (LoggedIn)
             {
-                CommandManager.HandleConsole(Username, CurrentDirectory, System.ConsoleColor.Magenta, System.ConsoleColor.Blue, ':');
+                System.Console.Write(">");
+                string input = System.Console.ReadLine();
+                string response = commandManager.ProcessInput(input);
+                System.Console.WriteLine(response);
             }
             else
             {

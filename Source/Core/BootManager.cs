@@ -1,5 +1,4 @@
 ﻿using Cosmos.HAL.Drivers.Audio;
-using Cosmos.System.Audio;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
 using Cosmos.System.Graphics;
@@ -45,7 +44,7 @@ namespace BootNET.Core
                 Console.ResetColor();
                 FilesystemEnabled = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Filesystem disabled: " + ex.Message);
