@@ -23,7 +23,7 @@ namespace BootNET.Desktop.TextKit
         /// <returns>The computed layout.</returns>
         public static TextLayout LayOut(TextBlock block, int? containerWidth = null, bool wrapping = false, TextAlignment horizontalAlignment = TextAlignment.Left)
         {
-            TextLayout layout = new TextLayout(block, containerWidth, wrapping, horizontalAlignment);
+            TextLayout layout = new(block, containerWidth, wrapping, horizontalAlignment);
             layout.ComputeLayout();
             return layout;
         }
@@ -62,7 +62,7 @@ namespace BootNET.Desktop.TextKit
 
             bool ignore = false;
 
-            GlyphLine currentLine = new GlyphLine();
+            GlyphLine currentLine = new();
             GlyphLines.Add(currentLine);
 
             // _indexLut = new int[TextBlock.Length];
@@ -140,7 +140,7 @@ namespace BootNET.Desktop.TextKit
                         continue;
                     }
 
-                    OutputGlyph outputGlyph = new OutputGlyph(x, y, glyph, fragment.Style);
+                    OutputGlyph outputGlyph = new(x, y, glyph, fragment.Style);
                     currentLine.OutputGlyphs.Add(outputGlyph);
 
                     bool move = !ignore;
@@ -320,7 +320,7 @@ namespace BootNET.Desktop.TextKit
         /// <summary>
         /// Glyph lines.
         /// </summary>
-        public readonly List<GlyphLine> GlyphLines = new List<GlyphLine>();
+        public readonly List<GlyphLine> GlyphLines = new();
 
         /// <summary>
         /// The laid out glyphs.

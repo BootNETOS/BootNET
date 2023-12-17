@@ -72,10 +72,10 @@ namespace BootNET.Desktop.SurfaceKit
 
             TextStyle style = _surface.Focused ? TITLE_STYLE_FOCUSED : TITLE_STYLE_UNFOCUSED;
 
-            TextBlock block = new TextBlock(style, _title);
+            TextBlock block = new(style, _title);
             TextLayout layout = TextLayout.LayOut(block, _contentAreaCanvas.Width, false, TextAlignment.Center);
 
-            TextRenderer renderer = new TextRenderer();
+            TextRenderer renderer = new();
             renderer.Render(layout, _contentAreaCanvas, 0, 0);
         }
 
@@ -188,7 +188,7 @@ namespace BootNET.Desktop.SurfaceKit
                 if (x >= button.X && y >= button.Y && x < button.X + button.Width && y < button.Y + button.Height)
                 {
                     Rectangle buttonScreenRect = GetButtonScreenRect(button);
-                    TitleBarButtonOperation operation = new TitleBarButtonOperation(surfaceManager, this, button, buttonScreenRect);
+                    TitleBarButtonOperation operation = new(surfaceManager, this, button, buttonScreenRect);
                     surfaceManager.BeginOperation(operation);
                     return;
                 }
@@ -235,7 +235,7 @@ namespace BootNET.Desktop.SurfaceKit
         /// <summary>
         /// Get the rectangle of the title bar, relative to the screen.
         /// </summary>
-        public Rectangle Rectangle => new Rectangle(_surface.X, _surface.Y - TITLEBAR_HEIGHT, _surface.Canvas.Width, TITLEBAR_HEIGHT);
+        public Rectangle Rectangle => new(_surface.X, _surface.Y - TITLEBAR_HEIGHT, _surface.Canvas.Width, TITLEBAR_HEIGHT);
 
         /// <summary>
         /// The total height of the titlebar.
@@ -250,17 +250,17 @@ namespace BootNET.Desktop.SurfaceKit
         /// <summary>
         /// The title bar's buttons.
         /// </summary>
-        private readonly List<TitleBarButton> _buttons = new List<TitleBarButton>();
+        private readonly List<TitleBarButton> _buttons = new();
 
         /// <summary>
         /// The rich text style of the titlebar's title when the window is focused.
         /// </summary>
-        private static readonly TextStyle TITLE_STYLE_FOCUSED = new TextStyle(Resources.Cantarell, GraphicsKit.Color.Black);
+        private static readonly TextStyle TITLE_STYLE_FOCUSED = new(Resources.Cantarell, GraphicsKit.Color.Black);
 
         /// <summary>
         /// The rich text style of the titlebar's title when the window is unfocused..
         /// </summary>
-        private static readonly TextStyle TITLE_STYLE_UNFOCUSED = new TextStyle(Resources.Cantarell, GraphicsKit.Color.LightGray);
+        private static readonly TextStyle TITLE_STYLE_UNFOCUSED = new(Resources.Cantarell, GraphicsKit.Color.LightGray);
 
         // /// <summary>
         // /// The rich text style of the titlebar's title shadow.
@@ -270,12 +270,12 @@ namespace BootNET.Desktop.SurfaceKit
         /// <summary>
         /// The surface this title bar belongs to.
         /// </summary>
-        private Surface _surface;
+        private readonly Surface _surface;
 
         /// <summary>
         /// The canvas of the titlebar's content area (i.e. the whole thing, excluding the left and right edges.)
         /// </summary>
-        private Canvas _contentAreaCanvas;
+        private readonly Canvas _contentAreaCanvas;
 
         /// <summary>
         /// The title displayed in the titlebar.

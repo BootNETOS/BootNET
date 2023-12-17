@@ -58,7 +58,7 @@ namespace BootNET.Desktop.TextKit
         /// <param name="text">The text to append.</param>
         public void Append(string text)
         {
-            TextFragment fragment = new TextFragment(text, Style);
+            TextFragment fragment = new(text, Style);
             Append(fragment);
         }
 
@@ -123,7 +123,7 @@ namespace BootNET.Desktop.TextKit
         {
             get
             {
-                StringBuilder builder = new StringBuilder();
+                StringBuilder builder = new();
                 foreach (TextFragment fragment in Fragments)
                 {
                     builder.Append(fragment.Text);
@@ -225,6 +225,6 @@ namespace BootNET.Desktop.TextKit
         /// <summary>
         /// The default style for text blocks.
         /// </summary>
-        private readonly TextStyle _defaultStyle = new TextStyle(Resources.Cantarell, Color.Black);
+        private readonly TextStyle _defaultStyle = new(Resources.Cantarell, Color.Black);
     }
 }

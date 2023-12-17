@@ -36,7 +36,7 @@ namespace BootNET.Desktop.UIKit
                 titlebar: true,
                 resizable: false)
         {
-            UICanvasView iconView = new UICanvasView(Filters.Scale(64, 64, icon), alpha: true)
+            UICanvasView iconView = new(Filters.Scale(64, 64, icon), alpha: true)
             {
                 Location = new(24, 24),
             };
@@ -46,7 +46,7 @@ namespace BootNET.Desktop.UIKit
                 ExplicitWidth = Surface.Canvas.Width - 136,
                 Wrapping = true
             };
-            UIBoxLayout buttonLayout = new UIBoxLayout(UIBoxOrientation.Horizontal)
+            UIBoxLayout buttonLayout = new(UIBoxOrientation.Horizontal)
             {
                 Spacing = 8
             };

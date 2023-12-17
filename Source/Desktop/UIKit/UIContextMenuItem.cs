@@ -28,7 +28,7 @@ namespace BootNET.Desktop.UIKit
         /// <returns>The button.</returns>
         public UIButton CreateButton()
         {
-            UIButton button = new UIButton(Text)
+            UIButton button = new(Text)
             {
                 Style = new UIContextMenuButtonStyle(),
                 ExplicitHeight = 24,

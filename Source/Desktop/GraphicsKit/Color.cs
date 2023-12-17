@@ -716,7 +716,7 @@ public struct Color
     /// Converts the color to be only in grayscale.
     /// </summary>
     /// <returns>Grayscale color.</returns>
-    public Color ToGrayscale()
+    public readonly Color ToGrayscale()
     {
         // TODOTODO: Is this correct?
         return new(255, (byte)(Brightness * 255), (byte)(Brightness * 255), (byte)(Brightness * 255));

@@ -270,7 +270,7 @@ namespace BootNET.Desktop.UIKit
             _queuedPaintRects.Add(rect);
         }
 
-        private readonly List<Rectangle> _queuedPaintRects = new List<Rectangle>(100);
+        private readonly List<Rectangle> _queuedPaintRects = new(100);
 
         /// <summary>
         /// The surface of the window.
@@ -280,7 +280,7 @@ namespace BootNET.Desktop.UIKit
         /// <summary>
         /// The size of the window's surface.
         /// </summary>
-        public Size Size => new Size(Surface.Canvas.Width, Surface.Canvas.Height);
+        public Size Size => new(Surface.Canvas.Width, Surface.Canvas.Height);
 
         /// <summary>
         /// The root view of the window.
@@ -313,12 +313,10 @@ namespace BootNET.Desktop.UIKit
         /// </summary>
         private UIView? _pressedView = null;
 
-        private bool _exitedPressedView = false;
-
         /// <summary>
         /// Private backing cache for BackgroundColor.
         /// </summary>
-        private GraphicsKit.Color _backgroundColor = new GraphicsKit.Color(0xFFECECEC);
+        private GraphicsKit.Color _backgroundColor = new(0xFFECECEC);
 
         /// <summary>
         /// Close the window.

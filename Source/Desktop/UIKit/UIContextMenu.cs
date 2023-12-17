@@ -33,7 +33,7 @@ namespace BootNET.Desktop.UIKit
         {
             List<(UIButton, UIContextMenuItem)> buttonItemPairs = new();
 
-            UIBoxLayout menuLayout = new UIBoxLayout(UIBoxOrientation.Vertical)
+            UIBoxLayout menuLayout = new(UIBoxOrientation.Vertical)
             {
                 Location = new Point(0, VERTICAL_PADDING)
             };
@@ -48,7 +48,7 @@ namespace BootNET.Desktop.UIKit
 
                 if (i < _sections.Count - 1)
                 {
-                    UIRectView divider = new UIRectView()
+                    UIRectView divider = new()
                     {
                         Color = GraphicsKit.Color.LightGray,
                         ExplicitHeight = 1,
@@ -59,7 +59,7 @@ namespace BootNET.Desktop.UIKit
             }
             menuLayout.LayOut();
 
-            UIWindow window = new UIWindow(
+            UIWindow window = new(
                 surfaceManager,
                 (ushort)menuLayout.Size.Width,
                 (ushort)(menuLayout.Size.Height + (VERTICAL_PADDING * 2)),
@@ -102,10 +102,5 @@ namespace BootNET.Desktop.UIKit
         /// The vertical padding of the context menu.
         /// </summary>
         private const int VERTICAL_PADDING = 5;
-
-        /// <summary>
-        /// The spacing between context menu items.
-        /// </summary>
-        private const int SPACING = 0;
     }
 }

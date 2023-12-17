@@ -24,7 +24,7 @@ namespace BootNET.Desktop.DE
             Surface.Shadow = false;
             Surface.BorderColor = GraphicsKit.Color.Transparent;
             Surface.IsShell = true;
-            UICanvasView wallpaper = new UICanvasView(new Size(surfaceManager.Width, surfaceManager.Height));
+            UICanvasView wallpaper = new(new Size(surfaceManager.Width, surfaceManager.Height));
             wallpaper.Canvas.DrawImage(0, 0, Resources.Wallpaper);
             RootView.Add(wallpaper);
         }

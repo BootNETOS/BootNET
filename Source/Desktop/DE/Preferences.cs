@@ -20,7 +20,7 @@ namespace BootNET.Desktop.DE
         {
             MainWindow = new UIWindow(surfaceManager, 300, 128, "System Preferences", resizable: false);
 
-            UIButton shadows = new UIButton("Window shadows")
+            UIButton shadows = new("Window shadows")
             {
                 Location = new(24, 24),
                 Checkable = true,
@@ -30,7 +30,7 @@ namespace BootNET.Desktop.DE
             };
             shadows.OnCheckedChange.Bind(HandleShadowsCheckedChange);
 
-            UIButton close = new UIButton("Close");
+            UIButton close = new("Close");
             close.Location = new(
                 MainWindow.Surface.Canvas.Width - close.Size.Width - 24,
                 MainWindow.Surface.Canvas.Height - close.Size.Height - 24

@@ -101,7 +101,7 @@ namespace BootNET.Desktop.UIKit
         /// <returns>A list of all of the descendants of this view.</returns>
         public List<UIView> GetDescendants()
         {
-            List<UIView> descendants = new List<UIView>();
+            List<UIView> descendants = new();
 
             foreach (UIView child in _children)
             {
@@ -194,7 +194,7 @@ namespace BootNET.Desktop.UIKit
         /// Get the implicit size of the view.
         /// </summary>
         /// <returns>The implicit size of the view.</returns>
-        protected virtual Size GetImplicitSize() => new Size(100, 100);
+        protected virtual Size GetImplicitSize() => new(100, 100);
 
         /// <summary>
         /// The actual size of the view.
@@ -451,7 +451,7 @@ namespace BootNET.Desktop.UIKit
         /// <summary>
         /// The children of the view. Do not modify this list directly; rather use the appropriate public methods.
         /// </summary>
-        protected readonly List<UIView> _children = new List<UIView>();
+        protected readonly List<UIView> _children = new();
 
         /// <summary>
         /// The private backing cache for Window.

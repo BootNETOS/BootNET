@@ -20,11 +20,11 @@ namespace BootNET.Desktop.UIKit
         /// <summary>
         /// Neutral slice.
         /// </summary>
-        private static readonly Slice _slice = new Slice(Resources.Button, 4);
+        private static readonly Slice _slice = new(Resources.Button, 4);
 
         /// <summary>
         /// Pressed slice.
         /// </summary>
-        private static readonly Slice _slicePress = new Slice(Resources.ButtonPress, 4);
+        private static readonly Slice _slicePress = new(Resources.ButtonPress, 4);
     }
 }

@@ -80,18 +80,10 @@ namespace BootNET.Desktop.SurfaceKit
             target.DrawImage(X, Y, Canvas, Alpha: false);
         }
 
-        public void Resize(ushort width, ushort height)
-        {
-            // CAUSES MEMORY CORRUPTION FOR SOME REASON!
-            // Canvas.Width = width;
-            // Canvas.Height = height;
-            // OnResized.Fire(new());
-        }
-
         /// <summary>
         /// Get the rectangle of the surface.
         /// </summary>
-        public Rectangle Rectangle => new Rectangle(X, Y, Canvas.Width, Canvas.Height);
+        public Rectangle Rectangle => new(X, Y, Canvas.Width, Canvas.Height);
 
         /// <summary>
         /// If the mouse is over the surface.
@@ -105,7 +97,7 @@ namespace BootNET.Desktop.SurfaceKit
         {
             get
             {
-                Rectangle resizeZone = new Rectangle(X + Canvas.Width, Y + Canvas.Height, RESIZE_ZONE_SIZE, RESIZE_ZONE_SIZE);
+                Rectangle resizeZone = new(X + Canvas.Width, Y + Canvas.Height, RESIZE_ZONE_SIZE, RESIZE_ZONE_SIZE);
                 return resizeZone.Contains(MousePointer.Location);
             }
         }

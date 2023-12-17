@@ -25,6 +25,6 @@ namespace BootNET.Desktop.InputKit
         /// <summary>
         /// The location of the mouse pointer.
         /// </summary>
-        public static Point Location => new Point(X, Y);
+        public static Point Location => new(X, Y);
     }
 }

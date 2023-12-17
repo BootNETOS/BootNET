@@ -44,7 +44,7 @@ namespace BootNET.Desktop.InputKit
         /// <summary>
         /// The point of the event relative to the screen.
         /// </summary>
-        public Point ScreenPoint => new Point(ScreenX, ScreenY);
+        public Point ScreenPoint => new(ScreenX, ScreenY);
 
         /// <summary>
         /// The X coordinate of the event relative to the object that received it.
@@ -59,7 +59,7 @@ namespace BootNET.Desktop.InputKit
         /// <summary>
         /// The point of the event relative to the object that received it.
         /// </summary>
-        public Point Point => new Point(X, Y);
+        public Point Point => new(X, Y);
 
         /// <summary>
         /// The state of the mouse.

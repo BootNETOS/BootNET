@@ -42,13 +42,28 @@ namespace BootNET.Desktop.TextKit
         /// </summary>
         public Color Color;
 
-        public override bool Equals([NotNullWhen(true)] object? obj)
+        public readonly override bool Equals([NotNullWhen(true)] object? obj)
         {
             if (obj is TextStyle style)
             {
                 return style.Color == Color && style.FontFace == FontFace;
             }
             return false;
+        }
+
+        public static bool operator ==(TextStyle left, TextStyle right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(TextStyle left, TextStyle right)
+        {
+            return !(left == right);
+        }
+
+        public override int GetHashCode()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

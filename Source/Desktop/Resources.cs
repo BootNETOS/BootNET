@@ -1,10 +1,9 @@
+
 /*
  *  This file is part of the Mirage Desktop Environment.
  *  github.com/mirage-desktop/Mirage
  */
-#pragma warning disable CS8618
 #pragma warning disable CS0649
-#pragma warning disable CS8604
 
 using BootNET.Desktop.GraphicsKit;
 using BootNET.Desktop.TextKit;
@@ -17,17 +16,17 @@ namespace BootNET.Desktop
     {
 
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.Cantarell.acf")] private static readonly byte[] _cantarell;
-        public static readonly AcfFontFace Cantarell = new AcfFontFace(new MemoryStream(_cantarell));
+        public static readonly AcfFontFace Cantarell = new(new MemoryStream(_cantarell));
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.CantarellBold.acf")] private static readonly byte[] _cantarellBold;
-        public static readonly AcfFontFace CantarellBold = new AcfFontFace(new MemoryStream(_cantarellBold));
+        public static readonly AcfFontFace CantarellBold = new(new MemoryStream(_cantarellBold));
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.CantarellLarge.acf")] private static readonly byte[] _cantarellLarge;
-        public static readonly AcfFontFace CantarellLarge = new AcfFontFace(new MemoryStream(_cantarellLarge));
+        public static readonly AcfFontFace CantarellLarge = new(new MemoryStream(_cantarellLarge));
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.Serif.acf")] private static readonly byte[] _serif;
-        public static readonly AcfFontFace Serif = new AcfFontFace(new MemoryStream(_serif));
+        public static readonly AcfFontFace Serif = new(new MemoryStream(_serif));
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.LiberationSerif.acf")] private static readonly byte[] _liberationSerif;
-        public static readonly AcfFontFace LiberationSerif = new AcfFontFace(new MemoryStream(_liberationSerif));
+        public static readonly AcfFontFace LiberationSerif = new(new MemoryStream(_liberationSerif));
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.Segment.acf")] private static readonly byte[] _segment;
-        public static readonly AcfFontFace Segment = new AcfFontFace(new MemoryStream(_segment));
+        public static readonly AcfFontFace Segment = new(new MemoryStream(_segment));
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.Pointer.bmp")] private static readonly byte[] _pointer;
         public static readonly Canvas Pointer = Image.FromBitmap(_pointer);
         [ManifestResourceStream(ResourceName = "BootNET.Desktop.Resources.Pointer_Resize.bmp")] private static readonly byte[] _pointerResize;

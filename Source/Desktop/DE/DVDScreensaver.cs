@@ -27,7 +27,7 @@ namespace BootNET.Desktop.DE
             Update();
         }
 
-        private static Random _random = new Random();
+        private readonly static Random _random = new();
 
         private static Color PickRandomColor()
         {

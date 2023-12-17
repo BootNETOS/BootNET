@@ -33,7 +33,7 @@ namespace BootNET.Desktop.DE
         {
             MainWindow = new UIWindow(surfaceManager, 480, 360, "Setup", resizable: false);
 
-            UICanvasView icon = new UICanvasView(Resources.Keyboard, alpha: true)
+            UICanvasView icon = new(Resources.Keyboard, alpha: true)
             {
                 Location = new(24, 24),
             };
@@ -43,19 +43,19 @@ namespace BootNET.Desktop.DE
             headerBlock.Style = new TextStyle(Resources.Cantarell, Color.DeepGray);
             headerBlock.Append("Select your keyboard layout.");
 
-            UITextView label = new UITextView(headerBlock)
+            UITextView label = new(headerBlock)
             {
                 Location = new(112, 24),
             };
 
-            UIBoxLayout layout = new UIBoxLayout(UIBoxOrientation.Vertical)
+            UIBoxLayout layout = new(UIBoxOrientation.Vertical)
             {
                 Location = new(112, 88),
             };
-            List<UIButton> options = new List<UIButton>();
+            List<UIButton> options = new();
             foreach (var (Name, ScanMap) in _scanMaps)
             {
-                UIButton option = new UIButton(Name)
+                UIButton option = new(Name)
                 {
                     HorizontalPadding = 32,
                     Style = new UIRadioButtonStyle(),

@@ -2,6 +2,7 @@
  *  This file is part of the Mirage Desktop Environment.
  *  github.com/mirage-desktop/Mirage
  */
+using BootNET.Desktop.GraphicsKit.Fonts;
 using Cosmos.Core;
 using System;
 using System.Drawing;
@@ -193,7 +194,7 @@ public unsafe class Canvas
     /// <summary>
     /// The size of the canvas.
     /// </summary>
-    public Size Size => new Size(_Width, _Height);
+    public Size Size => new(_Width, _Height);
 
     /// <summary>
     /// The total area of the canvas in pixels.

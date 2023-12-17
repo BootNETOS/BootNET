@@ -28,21 +28,21 @@ namespace BootNET.Desktop.SurfaceKit
 
         private void SignalDown()
         {
-            MouseArgs args = new MouseArgs(MousePointer.X, MousePointer.Y, MouseManager.MouseState);
+            MouseArgs args = new(MousePointer.X, MousePointer.Y, MouseManager.MouseState);
             args = args.Localize(_surface.X, _surface.Y);
             _surface.OnMouseDown.Fire(args);
         }
 
         private void SignalRelease()
         {
-            MouseArgs args = new MouseArgs(MousePointer.X, MousePointer.Y, MouseManager.LastMouseState);
+            MouseArgs args = new(MousePointer.X, MousePointer.Y, MouseManager.LastMouseState);
             args = args.Localize(_surface.X, _surface.Y);
             _surface.OnMouseRelease.Fire(args);
         }
 
         private void SignalDragAndMove()
         {
-            MouseArgs args = new MouseArgs(MousePointer.X, MousePointer.Y, MouseManager.MouseState);
+            MouseArgs args = new(MousePointer.X, MousePointer.Y, MouseManager.MouseState);
             args = args.Localize(_surface.X, _surface.Y);
             _surface.OnMouseMove.Fire(args);
             _surface.OnMouseDrag.Fire(args);
@@ -50,7 +50,7 @@ namespace BootNET.Desktop.SurfaceKit
 
         private void SignalClick()
         {
-            MouseArgs args = new MouseArgs(MousePointer.X, MousePointer.Y, MouseManager.LastMouseState);
+            MouseArgs args = new(MousePointer.X, MousePointer.Y, MouseManager.LastMouseState);
             args = args.Localize(_surface.X, _surface.Y);
             _surface.OnMouseClick.Fire(args);
         }

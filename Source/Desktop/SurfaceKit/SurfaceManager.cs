@@ -149,7 +149,7 @@ namespace BootNET.Desktop.SurfaceKit
 
                     if (MouseManager.DeltaX > 0 || MouseManager.DeltaY > 0)
                     {
-                        MouseArgs args = new MouseArgs(MousePointer.X, MousePointer.Y, MouseManager.MouseState);
+                        MouseArgs args = new(MousePointer.X, MousePointer.Y, MouseManager.MouseState);
                         args = args.Localize(surface.X, surface.Y);
                         surface.OnMouseMove.Fire(args);
                     }
@@ -161,7 +161,7 @@ namespace BootNET.Desktop.SurfaceKit
             // keys
             if (KeyboardManager.TryReadKey(out KeyEvent @event))
             {
-                KeyboardArgs args = new KeyboardArgs(@event.Key, @event.KeyChar, @event.Modifiers);
+                KeyboardArgs args = new(@event.Key, @event.KeyChar, @event.Modifiers);
                 ActiveSurface?.OnKeyTyped.Fire(args);
             }
         }
@@ -201,7 +201,7 @@ namespace BootNET.Desktop.SurfaceKit
         /// </summary>
         /// <param name="pointerType">The pointer type.</param>
         /// <returns>Pointer image for this pointer type.</returns>
-        private Canvas GetImageForPointerType(PointerType pointerType)
+        private static Canvas GetImageForPointerType(PointerType pointerType)
         {
             return pointerType switch
             {
@@ -217,7 +217,7 @@ namespace BootNET.Desktop.SurfaceKit
         /// </summary>
         /// <param name="pointerType">Pointer type.</param>
         /// <returns>Drawing offset.</returns>
-        private (int X, int Y) GetOffsetForPointerType(PointerType pointerType)
+        private static (int X, int Y) GetOffsetForPointerType(PointerType pointerType)
         {
             return pointerType switch
             {
@@ -252,9 +252,9 @@ namespace BootNET.Desktop.SurfaceKit
             {
                 pointerType = _currentOperation.GetPointerType();
             }
-            (int X, int Y) pointerOffset = GetOffsetForPointerType(pointerType);
+            (int X, int Y) = GetOffsetForPointerType(pointerType);
             Canvas pointerImage = GetImageForPointerType(pointerType);
-            _display.DrawImage(MousePointer.X + pointerOffset.X, MousePointer.Y + pointerOffset.Y, pointerImage);
+            _display.DrawImage(MousePointer.X + X, MousePointer.Y + Y, pointerImage);
         }
 
         /// <summary>
@@ -497,12 +497,7 @@ namespace BootNET.Desktop.SurfaceKit
         /// <summary>
         /// A list of all surfaces tracked by the <see cref="SurfaceManager"/>, in back-to-front order.
         /// </summary>
-        private readonly List<Surface> _surfaces = new List<Surface>();
-
-        /// <summary>
-        /// The background color.
-        /// </summary>
-        private readonly Color _backgroundColor = new Color(0xFF4C7ABF);
+        private readonly List<Surface> _surfaces = new();
 
         /// <summary>
         /// The currently focused surface.
@@ -512,7 +507,7 @@ namespace BootNET.Desktop.SurfaceKit
         /// <summary>
         /// If the mouse is over the resize zone of any surface.
         /// </summary>
-        private bool _mouseIsOverResizeZone = false;
+        private bool _mouseIsOverResizeZone;
 
         /// <summary>
         /// If the system is in sleep mode.

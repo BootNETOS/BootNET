@@ -21,7 +21,7 @@ namespace BootNET.Desktop.DE
         {
             DistributionName = distributionName;
             DistributionVersion = distributionVersion;
-            SurfaceManager surfaceManager = new SurfaceManager();
+            SurfaceKit.SurfaceManager surfaceManager = new();
             _ = new OOBE(surfaceManager);
             for (; ; )
             {

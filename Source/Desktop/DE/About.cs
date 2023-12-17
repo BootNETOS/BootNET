@@ -23,12 +23,12 @@ namespace BootNET.Desktop.DE
         {
             MainWindow = new UIWindow(surfaceManager, 400, 240, "About This Computer", resizable: false);
 
-            UICanvasView icon = new UICanvasView(Resources.Computer, alpha: true)
+            UICanvasView icon = new(Resources.Computer, alpha: true)
             {
                 Location = new(24, 24),
             };
 
-            UITextView content = new UITextView(GetAboutTextBlock())
+            UITextView content = new(GetAboutTextBlock())
             {
                 Location = new(112, 24),
                 ExplicitWidth = MainWindow.Surface.Canvas.Width - 136,
@@ -37,7 +37,7 @@ namespace BootNET.Desktop.DE
                 ReadOnly = true,
             };
 
-            UIButton close = new UIButton("Close");
+            UIButton close = new("Close");
             close.Location = new(
                 MainWindow.Surface.Canvas.Width - close.Size.Width - 24,
                 MainWindow.Surface.Canvas.Height - close.Size.Height - 24
@@ -55,7 +55,7 @@ namespace BootNET.Desktop.DE
         /// <returns>A rich text block with system information.</returns>
         private TextBlock GetAboutTextBlock()
         {
-            TextBlock block = new TextBlock(_logoStyle, "Mirage\n")
+            TextBlock block = new(_logoStyle, "Mirage\n")
             {
                 Style = _valueStyle
             };

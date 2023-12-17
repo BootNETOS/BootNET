@@ -178,6 +178,6 @@ namespace BootNET.Desktop.TextKit
         /// <summary>
         /// Text highlight color.
         /// </summary>
-        private readonly Color _highlightColor = new Color(0xFFB4D5FE);
+        private readonly Color _highlightColor = new(0xFFB4D5FE);
     }
 }

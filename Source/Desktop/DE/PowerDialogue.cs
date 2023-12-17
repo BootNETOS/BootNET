@@ -64,7 +64,7 @@ namespace BootNET.Desktop.DE
             _isRebooting = isRebooting;
             _secondsRemaining = COUNTDOWN_TIME;
             string actionName = isRebooting ? "Restart" : "Power Off";
-            UIButton actionButton = new UIButton(actionName);
+            UIButton actionButton = new(actionName);
             actionButton.OnMouseClick.Bind((args) => PerformPowerAction());
             List<UIButton> buttons = new()
             {
@@ -84,32 +84,6 @@ namespace BootNET.Desktop.DE
                 _dialogue = null;
             });
         }
-
-        /// <summary>
-        /// Handle a second passing on the countdown timer.
-        /// </summary>
-        private static void HandleTimer(object? state)
-        {
-            if (_dialogue == null)
-            {
-                return;
-            }
-            _secondsRemaining--;
-            if (_secondsRemaining == 0)
-            {
-                PerformPowerAction();
-            }
-            else
-            {
-                _dialogue.DescriptionView.Content.Text = GetDescription();
-            }
-        }
-
-        /// <summary>
-        /// The timer for an automatic power action.
-        /// </summary>
-        private static readonly Timer _timer = new(HandleTimer, null, 1000, 1000);
-
         /// <summary>
         /// Seconds remaining until an automatic power action is performed.
         /// </summary>
