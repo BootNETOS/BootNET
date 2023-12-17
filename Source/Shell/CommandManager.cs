@@ -1,4 +1,6 @@
-﻿using BootNET.Shell.Commands;
+﻿using BootNET.Shell.Commands.ACPI;
+using BootNET.Shell.Commands.Filesystem;
+using BootNET.Shell.Commands.General;
 using System.Collections.Generic;
 
 namespace BootNET.Shell
@@ -13,8 +15,20 @@ namespace BootNET.Shell
             this.commands = new()
             {
                 new(""),
-                new Run("run"),
-                new StartX("startx")
+                //ACPI Commands
+                new Halt("halt"),
+                new Reboot("reboot"),
+                new Shutdown("shutdown"),
+                //Filesystem Commands
+                new Del("del"),
+                new Dir("ls"),
+                new Dir("dir"),
+                new Mkdir("mkdir"),
+                new Rmdir("rmdir"),
+                new Touch("touch"),
+                //General Commands
+                new Echo("echo"),
+                new Run("run")
             };
         }
 
