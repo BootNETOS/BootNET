@@ -1,6 +1,5 @@
 ﻿using Cosmos.HAL.Drivers.Audio;
 using Cosmos.System.FileSystem;
-using Cosmos.System.FileSystem.VFS;
 using Cosmos.System.Graphics;
 using Cosmos.System.Graphics.Fonts;
 using Cosmos.System.Network.IPv4.UDP.DHCP;
@@ -11,61 +10,53 @@ namespace BootNET.Core
     public static class BootManager
     {
         public static AC97 AudioDriver;
+        public static bool AudioEnabled = false;
         public static CosmosVFS FilesystemDriver = new();
         public static bool FilesystemEnabled = false;
+        public static DHCPClient xClient = new();
+        public static bool InternetEnabled = false;
         public static void Boot()
         {
-            //Setting VGA Font
-            VGAScreen.SetFont(PCScreenFont.Default.CreateVGAFont(), PCScreenFont.Default.Height);
-            Console.Clear();
-            Console.WriteLine("Connecting using Ethernet...");
             try
             {
-                //DHCP Client
+                VGAScreen.SetFont(PCScreenFont.Default.Data, PCScreenFont.Default.Height);
+                Console.Clear();
+                ConsoleEvents.Info("If you see this it means the VGA driver is working.");
+            }
+            catch (Exception ex)
+            {
+                ConsoleEvents.Fatal("Error while initializing VGA driver: " + ex.Message);
+                Console.Beep();
+            }
+            ConsoleEvents.Info("Connecting to the internet using DHCP...");
+            try
+            {
                 using (var xClient = new DHCPClient())
                 {
                     xClient.SendDiscoverPacket();
                 }
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Connected successfully.");
-                Console.ResetColor();
+                ConsoleEvents.Success("Connected to the internet successfully.");
+                InternetEnabled = true;
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Error while connecting: " + ex.Message);
-                Console.ResetColor();
+                ConsoleEvents.Error("Error while initializing DHCP: " + ex.Message);
+                ConsoleEvents.Warning("Internet disabled.");
+                InternetEnabled = false;
             }
-            try
-            {
-                VFSManager.RegisterVFS(FilesystemDriver, false);
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Filesystem enabled");
-                Console.ResetColor();
-                FilesystemEnabled = true;
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Filesystem disabled: " + ex.Message);
-                Console.ResetColor();
-                FilesystemEnabled = false;
-            }
+            ConsoleEvents.Info("Initializing audio driver...");
             try
             {
                 AudioDriver = AC97.Initialize(bufferSize: 4096);
+                ConsoleEvents.Success("Audio initialized successfully.");
+                AudioEnabled = true;
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Audio disabled: " + ex.Message);
-                Console.ResetColor();
+                ConsoleEvents.Error("Error while initializing Audio: " + ex.Message);
+                ConsoleEvents.Warning("Audio disabled.");
+                AudioEnabled = false;
             }
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("Welcome to BootNET!");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine();
         }
     }
 }
