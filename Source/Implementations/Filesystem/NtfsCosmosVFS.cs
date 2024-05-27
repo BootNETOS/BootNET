@@ -10,12 +10,12 @@ using System.IO;
 
 namespace BootNET.Implementations.Filesystem
 {
-    public class NtfsAwareCosmosVfs : VFSBase
+    public class NtfsCosmosVFS : VFSBase
     {
         private List<Partition> mPartitions;
         private List<FileSystem> mFileSystems;
         private FileSystem mCurrentFileSystem;
-        private List<FileSystemFactory> mRegisteredFileSystems;
+        private readonly List<FileSystemFactory> mRegisteredFileSystems;
         private TablePrinter tablePrinter;
 
         /// <summary>
@@ -25,7 +25,6 @@ namespace BootNET.Implementations.Filesystem
         {
             mPartitions = new List<Partition>();
             mFileSystems = new List<FileSystem>();
-            mRegisteredFileSystems = new List<FileSystemFactory>();
             tablePrinter = new TablePrinter();
 
             RegisterFileSystem(new NtfsFileSystemFactory());
@@ -60,7 +59,7 @@ namespace BootNET.Implementations.Filesystem
 
             if (aPath.Length == 0)
             {
-                throw new ArgumentException("aPath");
+                throw new ArgumentException(null, nameof(aPath));
             }
 
 
@@ -74,10 +73,7 @@ namespace BootNET.Implementations.Filesystem
             string xParentDirectory = Path.GetDirectoryName(aPath);
 
             DirectoryEntry xParentEntry = GetDirectory(xParentDirectory);
-            if (xParentEntry == null)
-            {
-                xParentEntry = CreateDirectory(xParentDirectory);
-            }
+            xParentEntry ??= CreateDirectory(xParentDirectory);
 
             var xFS = GetFileSystemFromPath(xParentDirectory);
             return xFS.CreateFile(xParentEntry, xFileToCreate);
@@ -100,7 +96,7 @@ namespace BootNET.Implementations.Filesystem
 
             if (aPath.Length == 0)
             {
-                throw new ArgumentException("aPath");
+                throw new ArgumentException(null, nameof(aPath));
             }
 
 
@@ -118,10 +114,7 @@ namespace BootNET.Implementations.Filesystem
 
             DirectoryEntry xParentEntry = GetDirectory(xParentDirectory);
 
-            if (xParentEntry == null)
-            {
-                xParentEntry = CreateDirectory(xParentDirectory);
-            }
+            xParentEntry ??= CreateDirectory(xParentDirectory);
 
 
             var xFS = GetFileSystemFromPath(xParentDirectory);
@@ -252,7 +245,7 @@ namespace BootNET.Implementations.Filesystem
         /// <returns>A list of directory entries for all volumes.</returns>
         public override List<DirectoryEntry> GetVolumes()
         {
-            List<DirectoryEntry> xVolumes = new List<DirectoryEntry>();
+            List<DirectoryEntry> xVolumes = new();
 
             for (int i = 0; i < mFileSystems.Count; i++)
             {
@@ -298,21 +291,14 @@ namespace BootNET.Implementations.Filesystem
             var xFileSystem = GetFileSystemFromPath(aPath);
             var xEntry = DoGetDirectoryEntry(aPath, xFileSystem);
 
-            if (xEntry == null)
-                throw new Exception($"{aPath} is neither a file neither a directory");
-
-            switch (xEntry.mEntryType)
+            return xEntry == null
+                ? throw new Exception($"{aPath} is neither a file neither a directory")
+                : xEntry.mEntryType switch
             {
-                case DirectoryEntryTypeEnum.File:
-                    return FileAttributes.Normal;
-
-                case DirectoryEntryTypeEnum.Directory:
-                    return FileAttributes.Directory;
-
-                case DirectoryEntryTypeEnum.Unknown:
-                default:
-                    throw new Exception($"{aPath} is neither a file neither a directory");
-            }
+                DirectoryEntryTypeEnum.File => FileAttributes.Normal,
+                DirectoryEntryTypeEnum.Directory => FileAttributes.Directory,
+                _ => throw new Exception($"{aPath} is neither a file neither a directory"),
+            };
         }
 
         /// <summary>
@@ -368,7 +354,7 @@ namespace BootNET.Implementations.Filesystem
                         break;
                     }
 
-                if (mFileSystems.Count > 0 && mFileSystems[mFileSystems.Count - 1].RootPath == rootPath)
+                if (mFileSystems.Count > 0 && mFileSystems[^1].RootPath == rootPath)
                 {
                     Console.WriteLine(string.Concat("Initialized ", mFileSystems.Count, " filesystem(s)"));
                     Directory.SetCurrentDirectory(rootPath);
@@ -421,7 +407,7 @@ namespace BootNET.Implementations.Filesystem
         /// <returns>A directory entry for the path.</returns>
         /// <exception cref="ArgumentNullException">aFS</exception>
         /// <exception cref="Exception">Path part ' + xPathPart + ' not found!</exception>
-        private DirectoryEntry DoGetDirectoryEntry(string aPath, FileSystem aFS)
+        private static DirectoryEntry DoGetDirectoryEntry(string aPath, FileSystem aFS)
         {
 
             if (String.IsNullOrEmpty(aPath))
@@ -479,7 +465,7 @@ namespace BootNET.Implementations.Filesystem
         /// </summary>
         /// <param name="aFS">The file system containing the volume.</param>
         /// <returns>A directory entry for the volume.</returns>
-        private DirectoryEntry GetVolume(FileSystem aFS)
+        private static DirectoryEntry GetVolume(FileSystem aFS)
         {
 
             if (aFS == null)
@@ -506,7 +492,7 @@ namespace BootNET.Implementations.Filesystem
              * to 1 character but any number is valid
              */
 
-            bool isOK = Int32.TryParse(driveId, out int val);
+            bool isOK = Int32.TryParse(driveId, result: out _);
 
             return isOK;
         }
@@ -560,14 +546,18 @@ namespace BootNET.Implementations.Filesystem
 
             xFs.Format(aDriveFormat, aQuick);
         }
+        //TO-DO: Implement these 2 
+        //Not implemented
         public override List<Disk> GetDisks()
         {
             throw new NotImplementedException();
         }
+        //Not implemented
         public override string GetNextFilesystemLetter()
         {
             throw new NotImplementedException();
         }
+
 
     }
 }
