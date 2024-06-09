@@ -6,17 +6,16 @@ namespace BootNET.Core
 {
     public class Program : Kernel
     {
-        public static SVGAIITerminal.SVGAIITerminal Console;
         public static Display Screen;
-        static BtfFontFace TerminalFont = new(Resources.fontData, 16);
+        public static SVGAIITerminal.SVGAIITerminal Console;
+        public static BtfFontFace TerminalFont = Resources.Font;
         protected override void BeforeRun()
         {
             Screen = Display.GetDisplay(1280, 720);
-            Console = new(Screen.Width, Screen.Height, TerminalFont);
+            Screen.Update();
         }
         protected override void Run()
         {
-
         }
     }
 }
