@@ -1,18 +1,19 @@
-﻿using Cosmos.System;
-using GrapeGL.Graphics.Fonts;
-using GrapeGL.Hardware.GPU;
+﻿using BootNET.Graphics;
+using BootNET.Graphics.Drivers;
+using Cosmos.System;
+using System.Drawing;
 
 namespace BootNET.Core
 {
     public class Program : Kernel
     {
-        public static Display Screen;
-        public static SVGAIITerminal.SVGAIITerminal Console;
-        public static BtfFontFace TerminalFont = Resources.Font;
+        Screen Display;
+        ushort pixelx, pixely;
         protected override void BeforeRun()
         {
-            Screen = Display.GetDisplay(1280, 720);
-            Screen.Update();
+            Display = new SVGAIIScreen();
+            pixelx = Display.Width / 2;
+            Display.SetPixel(pixelx, pixely, Color.White.ToArgb());
         }
         protected override void Run()
         {
