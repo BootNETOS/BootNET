@@ -13,7 +13,7 @@ namespace BootNET.Graphics
         public abstract ushort Depth { get; }
         public abstract void Update(bool doublebuffered = false);
         public abstract void Clear(uint color);
-        public abstract void SetPixel(uint x, uint y, uint color);
+        public abstract void SetPixel(ushort x, ushort y, ushort color);
         public abstract void SetMode(ushort width, ushort height, ushort depth = 32);
         public abstract void Disable();
         public abstract void DefineCursor(uint x, uint y, bool visible);

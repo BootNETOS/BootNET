@@ -19,20 +19,20 @@ namespace BootNET.Graphics.Drivers
         public override ushort Depth => depth;
         public override void Update(bool doublebuffer)
         {
-            if(doublebuffer == true)
+            if (doublebuffer == true)
             {
                 Device.DoubleBufferUpdate();
             }
             else
             {
-                Device.Update(0,0,width,height);
+                Device.Update(0, 0, width, height);
             }
         }
         public override void Clear(uint color)
         {
             Device.Clear(color);
         }
-        public override void SetPixel(uint x, uint y, uint color)
+        public override void SetPixel(ushort x, ushort y, ushort color)
         {
             Device.SetPixel(x, y, color);
         }
@@ -50,12 +50,12 @@ namespace BootNET.Graphics.Drivers
         public override void DefineCursor(uint x, uint y, bool visible)
         {
             Device.DefineCursor();
-            SetCursor(x,y, visible);
+            SetCursor(x, y, visible);
         }
         public override void DefineAlphaCursor(uint x, uint y, ushort width, ushort height, bool visible, int[] data)
         {
-            Device.DefineAlphaCursor(width,height,data);
-            SetCursor(x,y,visible);
+            Device.DefineAlphaCursor(width, height, data);
+            SetCursor(x, y, visible);
         }
         public override void SetCursor(uint x, uint y, bool visible)
         {
