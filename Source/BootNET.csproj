@@ -28,10 +28,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Resources\ArialCustomCharset16.btf" />
+      <None Remove="Resources\HelveticaCustomCharset16.btf" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\ArialCustomCharset16.btf" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Cosmos.Build" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
+        <PackageReference Include="SVGAIITerminal" Version="2.1.1" />
     </ItemGroup>
 
 
