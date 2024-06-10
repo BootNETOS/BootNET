@@ -28,28 +28,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Resources\Background.bmp" />
-      <None Remove="Resources\Busy.bmp" />
-      <None Remove="Resources\DefaultFont.btf" />
-      <None Remove="Resources\Error.bmp" />
-      <None Remove="Resources\HelveticaCustomCharset16.btf" />
-      <None Remove="Resources\Link.bmp" />
-      <None Remove="Resources\mango.bmp" />
-      <None Remove="Resources\Mouse.bmp" />
-      <None Remove="Resources\MouseDrag.bmp" />
-      <None Remove="Resources\MouseText.bmp" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Include="Resources\Background.bmp" />
-      <EmbeddedResource Include="Resources\Busy.bmp" />
-      <EmbeddedResource Include="Resources\DefaultFont.btf" />
-      <EmbeddedResource Include="Resources\Error.bmp" />
-      <EmbeddedResource Include="Resources\Link.bmp" />
-      <EmbeddedResource Include="Resources\mango.bmp" />
-      <EmbeddedResource Include="Resources\Mouse.bmp" />
-      <EmbeddedResource Include="Resources\MouseDrag.bmp" />
-      <EmbeddedResource Include="Resources\MouseText.bmp" />
+      <Compile Remove="Resources\**" />
+      <EmbeddedResource Remove="Resources\**" />
+      <None Remove="Resources\**" />
     </ItemGroup>
 
     <ItemGroup>

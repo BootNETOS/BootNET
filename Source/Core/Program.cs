@@ -1,22 +1,25 @@
-﻿using BootNET.Graphics;
-using BootNET.Graphics.Drivers;
+﻿using BootNET.Implementations.Filesystem;
+using Cosmos.Core;
 using Cosmos.System;
-using System.Drawing;
 
 namespace BootNET.Core
 {
     public class Program : Kernel
     {
-        Screen Display;
-        ushort pixelx, pixely;
+        public static string OS_Name = "BootNET";
+        public static string OS_Version = "24.07";
+        public static string CPU_Vendor = CPU.GetCPUVendorName();
+        public static string CPU_Brand_String = CPU.GetCPUBrandString();
+        public static string CPU_CycleSpeed = CPU.GetCPUCycleSpeed().ToString();
+        public static string Total_RAM = CPU.GetAmountOfRAM().ToString();
+        public 
+        NtfsCosmosVFS FileSystem;
         protected override void BeforeRun()
         {
-            Display = new SVGAIIScreen();
-            pixelx = Display.Width / 2;
-            Display.SetPixel(pixelx, pixely, Color.White.ToArgb());
         }
         protected override void Run()
         {
+            
         }
     }
 }
