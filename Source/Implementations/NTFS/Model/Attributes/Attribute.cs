@@ -93,71 +93,31 @@ namespace BootNET.Implementations.NTFS.Model.Attributes
                 return tmpRes;
             }
 
-            Attribute res;
-
-            switch (type)
+            Attribute res = type switch
             {
-                case AttributeType.Unknown:
-                    res = new AttributeGeneric();
-                    break;
-                case AttributeType.STANDARD_INFORMATION:
-                    res = new AttributeStandardInformation();
-                    break;
-                case AttributeType.ATTRIBUTE_LIST:
-                    res = new AttributeList();
-                    break;
-                case AttributeType.FILE_NAME:
-                    res = new AttributeFileName();
-                    break;
-                case AttributeType.OBJECT_ID:
-                    // Also OBJECT_ID
-                    // TODO: Handle either case
-                    res = new AttributeObjectId();
-                    break;
-                case AttributeType.SECURITY_DESCRIPTOR:
-                    res = new AttributeSecurityDescriptor();
-                    break;
-                case AttributeType.VOLUME_NAME:
-                    res = new AttributeVolumeName();
-                    break;
-                case AttributeType.VOLUME_INFORMATION:
-                    res = new AttributeVolumeInformation();
-                    break;
-                case AttributeType.DATA:
-                    res = new AttributeData();
-                    break;
-                case AttributeType.INDEX_ROOT:
-                    res = new AttributeIndexRoot();
-                    break;
-                case AttributeType.INDEX_ALLOCATION:
-                    res = new AttributeIndexAllocation();
-                    break;
-                case AttributeType.BITMAP:
-                    res = new AttributeBitmap();
-                    break;
-                case AttributeType.REPARSE_POINT:
-                    // TODO
-                    res = new AttributeGeneric();
-                    break;
-                case AttributeType.EA_INFORMATION:
-                    res = new AttributeExtendedAttributeInformation();
-                    break;
-                case AttributeType.EA:
-                    res = new AttributeExtendedAttributes();
-                    break;
+                AttributeType.Unknown => new AttributeGeneric(),
+                AttributeType.STANDARD_INFORMATION => new AttributeStandardInformation(),
+                AttributeType.ATTRIBUTE_LIST => new AttributeList(),
+                AttributeType.FILE_NAME => new AttributeFileName(),
+                AttributeType.OBJECT_ID => new AttributeObjectId(),// Also OBJECT_ID
+                                                                   // TODO: Handle either case
+                AttributeType.SECURITY_DESCRIPTOR => new AttributeSecurityDescriptor(),
+                AttributeType.VOLUME_NAME => new AttributeVolumeName(),
+                AttributeType.VOLUME_INFORMATION => new AttributeVolumeInformation(),
+                AttributeType.DATA => new AttributeData(),
+                AttributeType.INDEX_ROOT => new AttributeIndexRoot(),
+                AttributeType.INDEX_ALLOCATION => new AttributeIndexAllocation(),
+                AttributeType.BITMAP => new AttributeBitmap(),
+                AttributeType.REPARSE_POINT => new AttributeGeneric(),// TODO
+                AttributeType.EA_INFORMATION => new AttributeExtendedAttributeInformation(),
+                AttributeType.EA => new AttributeExtendedAttributes(),
                 // Property set seems to be obsolete
                 //case AttributeType.PROPERTY_SET:
                 //    res = new MFTAttributeGeneric();
                 //    break;
-                case AttributeType.LOGGED_UTILITY_STREAM:
-                    res = new AttributeLoggedUtilityStream();
-                    break;
-                default:
-                    // TODO
-                    res = new AttributeGeneric();
-                    break;
-            }
-
+                AttributeType.LOGGED_UTILITY_STREAM => new AttributeLoggedUtilityStream(),
+                _ => new AttributeGeneric(),// TODO
+            };
             res.ParseHeader(data, offset);
             if (res.NonResidentFlag == ResidentFlag.Resident)
             {

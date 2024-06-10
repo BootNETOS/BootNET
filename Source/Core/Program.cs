@@ -1,4 +1,7 @@
-﻿using BootNET.Implementations.Filesystem;
+﻿using BootNET.Graphics;
+using BootNET.Graphics.Hardware;
+using BootNET.Graphics.Hardware.Legacy;
+using BootNET.Implementations.Filesystem;
 using Cosmos.Core;
 using Cosmos.System;
 
@@ -15,15 +18,19 @@ namespace BootNET.Core
         public static string Total_RAM = CPU.GetAmountOfRAM().ToString();
         #endregion
         #region Drivers
+        public static Display Screen;
         public static NtfsCosmosVFS FileSystem;
         #endregion
 
         protected override void BeforeRun()
         {
+            Screen = new VGACanvas(320, 200);
         }
         protected override void Run()
         {
-            
+            Screen.Clear();
+            Screen.DrawFilledRectangle(0,0,30,30,0,Color.White);
+            Screen.Update();
         }
     }
 }

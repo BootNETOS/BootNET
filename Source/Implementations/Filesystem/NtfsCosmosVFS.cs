@@ -294,11 +294,11 @@ namespace BootNET.Implementations.Filesystem
             return xEntry == null
                 ? throw new Exception($"{aPath} is neither a file neither a directory")
                 : xEntry.mEntryType switch
-            {
-                DirectoryEntryTypeEnum.File => FileAttributes.Normal,
-                DirectoryEntryTypeEnum.Directory => FileAttributes.Directory,
-                _ => throw new Exception($"{aPath} is neither a file neither a directory"),
-            };
+                {
+                    DirectoryEntryTypeEnum.File => FileAttributes.Normal,
+                    DirectoryEntryTypeEnum.Directory => FileAttributes.Directory,
+                    _ => throw new Exception($"{aPath} is neither a file neither a directory"),
+                };
         }
 
         /// <summary>
