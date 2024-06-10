@@ -23,7 +23,7 @@
         <Timeout>5</Timeout>
         <DebugEnabled>False</DebugEnabled>
         <VMWareEdition>Player</VMWareEdition>
-        <CompileVBEMultiboot>False</CompileVBEMultiboot>
+        <CompileVBEMultiboot>True</CompileVBEMultiboot>
         <VBEResolution>1280x720x32</VBEResolution>
         <OptimizationLevel>1</OptimizationLevel>
     </PropertyGroup>
