@@ -23,8 +23,9 @@
         <Timeout>5</Timeout>
         <DebugEnabled>False</DebugEnabled>
         <VMWareEdition>Player</VMWareEdition>
-        <CompileVBEMultiboot>False</CompileVBEMultiboot>
-        <VBEResolution></VBEResolution>
+        <CompileVBEMultiboot>True</CompileVBEMultiboot>
+        <VBEResolution>1280x720x32</VBEResolution>
+        <OptimizationLevel>1</OptimizationLevel>
     </PropertyGroup>
 
     <ItemGroup>
@@ -38,7 +39,6 @@
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
-        <PackageReference Include="SVGAIITerminal" Version="2.1.1" />
     </ItemGroup>
 
 
