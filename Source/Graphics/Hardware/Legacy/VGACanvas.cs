@@ -3,6 +3,7 @@ using System;
 
 namespace BootNET.Graphics.Hardware.Legacy
 {
+    //Not working right now
     public class VGACanvas : Display
     {
         public VGACanvas(ushort Width, ushort Height) : base(Width, Height)
