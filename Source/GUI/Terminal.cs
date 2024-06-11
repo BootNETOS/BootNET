@@ -124,7 +124,7 @@ namespace BootNET.GUI
         {
             Kernel.Screen.DrawImage(x,y,Console.Contents, false);
         }
-        public override void HandleKey(KeyEvent key)
+        public void HandleKey(KeyEvent key)
         {
             KeyBuffer.Enqueue(key);
         }
