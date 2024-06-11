@@ -32,7 +32,7 @@ class Dock
         {
             Desktop.apps[i].dockX = Devide / 2 + ((Desktop.ScreenWidth - Width) / 2) + (Desktop.programlogo.Width * i) + (Devide * i);
             Desktop.apps[i].dockY = Desktop.ScreenHeight - Desktop.programlogo.Height - Devide / 2;
-            Kernel.Screen.DrawImage(Desktop.apps[i].dockX, Desktop.apps[i].dockY,Desktop.programlogo,false);
+            Kernel.Screen.DrawImage(Desktop.apps[i].dockX, Desktop.apps[i].dockY, Desktop.apps[i].Icon, false);
         }
     }
 }

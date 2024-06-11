@@ -23,7 +23,7 @@ public static class Desktop
         MouseManager.ScreenHeight = ScreenHeight;
         MouseManager.X = MouseManager.ScreenWidth / 2;
         MouseManager.Y = MouseManager.ScreenHeight / 2;
-        avgCol = Color.LightPurple;
+        avgCol = Color.UltraViolet;
         dock = new();
         apps.Add(new TestApp(300, 200, 30, 30));
     }

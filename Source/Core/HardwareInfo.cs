@@ -1,10 +1,5 @@
 ﻿using Cosmos.Core;
 using Cosmos.System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Kernel = BootNET.Core.Program;
 
 namespace BootNET.Core
@@ -14,7 +9,7 @@ namespace BootNET.Core
         public static string GetGPU()
         {
             string ScreenName = Kernel.Screen.GetName();
-            if(ScreenName == "SVGAIICanvas")
+            if (ScreenName == "SVGAIICanvas")
             {
                 return "VMWareSVGAII Accelerated Display Adapter";
             }

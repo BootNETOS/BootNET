@@ -7,6 +7,7 @@ namespace BootNET.GUI;
 
 public class App
 {
+    public Canvas Icon;
     public readonly ushort _width;
     public readonly ushort _height;
     public readonly ushort width;
@@ -29,7 +30,7 @@ public class App
 
     public int _i = 0;
 
-    public App(ushort width, ushort height, int x = 0, int y = 0)
+    public App(Canvas Icon, ushort width, ushort height, int x = 0, int y = 0)
     {
         this._width = width;
         this._height = height;
@@ -40,6 +41,7 @@ public class App
         this.y = y + 22;
         this.width = System.Convert.ToUInt16(width - 4);
         this.height = System.Convert.ToUInt16(height - 22 - 1);
+        this.Icon = Icon;
     }
 
     public void Update()
@@ -89,7 +91,7 @@ public class App
         }
 
         Kernel.Screen.DrawFilledRectangle(_x, _y, _width, _height, 0, Color.White);
-        Kernel.Screen.DrawRectangle(_x, _y, _width, _height,0, Desktop.avgCol);
+        Kernel.Screen.DrawRectangle(_x, _y, _width, _height, 0, Desktop.avgCol);
 
         Kernel.Screen.DrawString(_x + 2, _y + 2, name, Font.Fallback, Color.Black);
         AppUpdate();

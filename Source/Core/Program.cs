@@ -1,13 +1,8 @@
-﻿using BootNET.Graphics;
-using BootNET.Graphics.Fonts;
-using BootNET.Graphics.Hardware;
-using BootNET.Graphics.Hardware.VMWare;
+﻿using BootNET.Graphics.Hardware;
 using BootNET.GUI;
 using BootNET.Implementations.Filesystem;
 using Cosmos.Core;
-using Cosmos.Core.Memory;
 using Cosmos.System;
-using System.Threading;
 
 namespace BootNET.Core
 {
