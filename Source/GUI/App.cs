@@ -89,7 +89,7 @@ namespace BootNET.GUI
             }
 
             Kernel.Screen.DrawFilledRectangle(_x, _y, _width, _height, 0, Color.White);
-            Kernel.Screen.DrawRectangle(_x, _y, _width, _height,0, Color.UltraViolet);
+            Kernel.Screen.DrawRectangle(_x, _y, _width, _height,0, Desktop.avgCol);
 
             Kernel.Screen.DrawString(_x + 2, _y + 2, name, Font.Fallback, Color.Black);
             AppUpdate();

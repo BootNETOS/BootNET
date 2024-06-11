@@ -29,9 +29,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Resources\**" />
-      <EmbeddedResource Remove="Resources\**" />
-      <None Remove="Resources\**" />
+      <None Remove="Resources\program.bmp" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\program.bmp" />
     </ItemGroup>
 
     <ItemGroup>

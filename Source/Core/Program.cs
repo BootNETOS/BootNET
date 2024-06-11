@@ -2,6 +2,7 @@
 using BootNET.Graphics.Fonts;
 using BootNET.Graphics.Hardware;
 using BootNET.Graphics.Hardware.VMWare;
+using BootNET.GUI;
 using BootNET.Implementations.Filesystem;
 using Cosmos.Core;
 using Cosmos.Core.Memory;
@@ -33,13 +34,11 @@ namespace BootNET.Core
             CPU_CycleSpeed = CPU.GetCPUCycleSpeed().ToString();
             Total_RAM = CPU.GetAmountOfRAM().ToString();
             Display_Driver = HardwareInfo.GetGPU();
+            Desktop.Initialize();
         }
         protected override void Run()
         {
-            Screen.Clear();
-            Screen.DrawString(2, 2, Display_Driver + " FPS: " + Screen.GetFPS().ToString(), Font.Fallback, Color.White);
-            Screen.Update();
-            Heap.Collect();
+            Desktop.Update();
         }
     }
 }
