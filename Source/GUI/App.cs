@@ -39,8 +39,8 @@ public class App
 
         this.x = x + 2;
         this.y = y + 22;
-        this.width = System.Convert.ToUInt16(width - 4);
-        this.height = System.Convert.ToUInt16(height - 22 - 1);
+        this.width = System.Convert.ToUInt16(width - 6);
+        this.height = System.Convert.ToUInt16(height - 24);
         this.Icon = Icon;
     }
 
@@ -90,10 +90,10 @@ public class App
             this.y = (int)MouseManager.Y + 22;
         }
 
-        Kernel.Screen.DrawFilledRectangle(_x, _y, _width, _height, 0, Color.White);
+        Kernel.Screen.DrawFilledRectangle(_x, _y, _width, _height, 0, Color.DeepGray);
         Kernel.Screen.DrawRectangle(_x, _y, _width, _height, 0, Desktop.avgCol);
 
-        Kernel.Screen.DrawString(_x + 2, _y + 2, name, Font.Fallback, Color.Black);
+        Kernel.Screen.DrawString(_x + 2, _y + 2, name, Font.Fallback, Color.White);
         AppUpdate();
 
     end:;

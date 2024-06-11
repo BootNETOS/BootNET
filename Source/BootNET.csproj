@@ -31,11 +31,13 @@
     <ItemGroup>
       <None Remove="Resources\Mouse.bmp" />
       <None Remove="Resources\program.bmp" />
+      <None Remove="Resources\terminal.bmp" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\Mouse.bmp" />
       <EmbeddedResource Include="Resources\program.bmp" />
+      <EmbeddedResource Include="Resources\terminal.bmp" />
     </ItemGroup>
 
     <ItemGroup>

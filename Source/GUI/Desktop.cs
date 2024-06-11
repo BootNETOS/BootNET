@@ -25,7 +25,8 @@ public static class Desktop
         MouseManager.Y = MouseManager.ScreenHeight / 2;
         avgCol = Color.UltraViolet;
         dock = new();
-        apps.Add(new TestApp(300, 200, 30, 30));
+        apps.Add(new TestApp(500, 400, 30, 30));
+        apps.Add(new Terminal(300,200,30,30));
     }
     public static void Update()
     {
