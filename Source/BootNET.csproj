@@ -29,10 +29,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Resources\Mouse.bmp" />
       <None Remove="Resources\program.bmp" />
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="Resources\Mouse.bmp" />
       <EmbeddedResource Include="Resources\program.bmp" />
     </ItemGroup>
 

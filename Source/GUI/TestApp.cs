@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BootNET.GUI
+namespace BootNET.GUI;
+
+public class TestApp : App
 {
-    public class TestApp : App
+    public TestApp(ushort width, ushort height, int x, int y) : base(width,height, x, y) { }
+    public override void AppUpdate()
     {
-        public TestApp(ushort width, ushort height, int x, int y) : base(width,height, x, y) { }
-        public override void AppUpdate()
-        {
-            base.AppUpdate();
-        }
+        base.AppUpdate();
     }
 }

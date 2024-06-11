@@ -6,5 +6,7 @@ namespace BootNET.Core
     {
         [ManifestResourceStream(ResourceName = "BootNET.Resources.program.bmp")]
         public static byte[] rawProgram;
+        [ManifestResourceStream(ResourceName = "BootNET.Resources.Mouse.bmp")]
+        public static byte[] rawMouse;
     }
 }
