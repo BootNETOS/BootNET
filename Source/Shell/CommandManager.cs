@@ -21,7 +21,7 @@ namespace BootNET.Shell
                 new Mkdir("mkdir"),
                 new Rmdir("rmdir"),
                 new Run("run"),
-                new StartMIV("miv"),
+                new InitFS("initfs"),
                 new Clear("clear"),
                 new Ls("ls"),
                 new Ls("dir"),
