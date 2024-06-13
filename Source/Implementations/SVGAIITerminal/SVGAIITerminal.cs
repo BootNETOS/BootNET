@@ -6,6 +6,7 @@ using System;
 using Cosmos.System;
 using BootNET.Graphics;
 using BootNET.Graphics.Fonts;
+using BootNET.GUI;
 namespace BootNET.Implementations.SVGAIITerminal;
 public class SVGAIITerminal
 {
@@ -18,7 +19,6 @@ public class SVGAIITerminal
     public bool CursorVisible = true;
 
     public Canvas Contents;
-    public Font Font;
 
     public Action Update;
 
@@ -26,11 +26,10 @@ public class SVGAIITerminal
 
     #region Constructors
 
-    public SVGAIITerminal(int Width, int Height, Font Font, Action Update)
+    public SVGAIITerminal(int Width, int Height, Action Update)
     {
-        this.Width = Width / Font.MeasureString("A");
-        this.Height = Height / Font.Size;
-        this.Font = Font;
+        this.Width = Width / 8;
+        this.Height = Height / 16;
         this.Update = Update;
         Contents = new Canvas((ushort)Width, (ushort)Height);
     }
@@ -62,8 +61,8 @@ public class SVGAIITerminal
                     break;
 
                 default:
-                    Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, BackgroundColor);
-                    Contents.DrawString(Font.Size / 2 * CursorX, Font.Size * CursorY, c.ToString(), Font, color);
+                    Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, BackgroundColor);
+                    Contents.DrawACSIIString(color, c.ToString(), 16 / 2 * CursorX, 16 * CursorY);
                     CursorX++;
                     break;
             }
@@ -83,11 +82,11 @@ public class SVGAIITerminal
             throw new ArgumentNullException(nameof(image));
         }
 
-        CursorY += image.Height / Font.Size;
+        CursorY += image.Height / 16;
 
         TryScroll();
 
-        Contents.DrawImage(Font.Size / 2 * CursorX, Font.Size * CursorY - (image.Height), image, alpha);
+        Contents.DrawImage(16 / 2 * CursorX, 16 * CursorY - (image.Height), image, alpha);
 
         Update?.Invoke();
     }
@@ -139,7 +138,7 @@ public class SVGAIITerminal
                 switch (key.Key)
                 {
                     case ConsoleKeyEx.Enter:
-                        Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, BackgroundColor);
+                        Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, BackgroundColor);
                         CursorX = 0;
                         CursorY++;
                         TryScroll();
@@ -152,16 +151,16 @@ public class SVGAIITerminal
                         {
                             if (CursorX == 0)
                             {
-                                Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, BackgroundColor);
+                                Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, BackgroundColor);
                                 CursorY--;
-                                CursorX = Contents.Width / (Font.Size / 2) - 1;
-                                Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, BackgroundColor);
+                                CursorX = Contents.Width / (16 / 2) - 1;
+                                Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, BackgroundColor);
                             }
                             else
                             {
-                                Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, BackgroundColor);
+                                Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, BackgroundColor);
                                 CursorX--;
-                                Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, BackgroundColor);
+                                Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, BackgroundColor);
                             }
 
                             returnValue = returnValue.Remove(returnValue.Length - 1); // Remove the last character of the string
@@ -242,8 +241,8 @@ public class SVGAIITerminal
 
         while (CursorY >= Height)
         {
-            Contents.DrawImage(0, -Font.Size, Contents, false);
-            Contents.DrawFilledRectangle(0, Contents.Height - Font.Size, Contents.Width, Font.Size, 0, BackgroundColor);
+            Contents.DrawImage(0, -16, Contents, false);
+            Contents.DrawFilledRectangle(0, Contents.Height - 16, Contents.Width, 16, 0, BackgroundColor);
             Update?.Invoke();
             CursorY--;
         }
@@ -251,7 +250,7 @@ public class SVGAIITerminal
 
     public void ForceDrawCursor()
     {
-        Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, ForegroundColor);
+        Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, ForegroundColor);
         Update?.Invoke();
     }
 
@@ -259,7 +258,7 @@ public class SVGAIITerminal
     {
         if (Cosmos.HAL.RTC.Second != lastSecond)
         {
-            Contents.DrawFilledRectangle(Font.Size / 2 * CursorX, Font.Size * CursorY, Convert.ToUInt16(Font.Size / 2), Font.Size, 0, cursorState ? ForegroundColor : BackgroundColor);
+            Contents.DrawFilledRectangle(16 / 2 * CursorX, 16 * CursorY, Convert.ToUInt16(16 / 2), 16, 0, cursorState ? ForegroundColor : BackgroundColor);
             Update?.Invoke();
 
             lastSecond = Cosmos.HAL.RTC.Second;

@@ -15,6 +15,7 @@ public static class Desktop
     public static Canvas programlogo = Image.FromBitmap(Core.Resources.rawProgram);
     static Dock dock;
     static readonly Canvas Cursor = Image.FromBitmap(Core.Resources.rawMouse);
+    public static Terminal terminal;
     public static void Initialize()
     {
         ScreenWidth = Kernel.Screen.Width;
@@ -25,8 +26,9 @@ public static class Desktop
         MouseManager.Y = MouseManager.ScreenHeight / 2;
         avgCol = Color.UltraViolet;
         dock = new();
-        apps.Add(new TestApp(500, 400, 30, 30));
-        apps.Add(new Terminal(300,200,30,30));
+        apps.Add(new TestApp(700, 500, 30, 30));
+        terminal = new(700,500,30,30);
+        apps.Add(terminal);
     }
     public static void Update()
     {

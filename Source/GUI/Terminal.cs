@@ -12,37 +12,35 @@ namespace BootNET.GUI
 {
     public class Terminal : App
     {
-        private readonly Queue<KeyEvent> KeyBuffer = new();
-        readonly SVGAIITerminal Console;
+        private KeyEvent keyEvent;
+        public readonly SVGAIITerminal Console;
         public string returnValue = string.Empty;
         public int startX = 0, startY = 0;
         public Terminal(ushort width, ushort height, int x, int y) : base(Image.FromBitmap(Core.Resources.rawTerminal), width, height, x, y)
         {
-            this.name = "Terminal";
-            Console = new(width, height, Font.Fallback, TerminalUpdate);
+            name = "Terminal";
+            Console = new(width-2, height-22, TerminalUpdate);
+            Console.WriteLine("Welcome to " + Kernel.OS_Name + " Version " + Kernel.OS_Version);
+            Console.WriteLine();
+            DrawPrompt();
         }
         public override void AppUpdate()
         {
             TerminalUpdate();
             Console.TryDrawCursor();
 
-            if (KeyBuffer.TryDequeue(out var key))
+            if (KeyboardManager.TryReadKey(out keyEvent))
             {
-                switch (key.Key)
+                switch (keyEvent.Key)
                 {
                     case ConsoleKeyEx.Enter:
-                        Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, System.Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                        Console.Contents.DrawFilledRectangle(16 / 2 * Console.CursorX, 16 * Console.CursorY, System.Convert.ToUInt16(16 / 2), 16, 0, Console.BackgroundColor);
                         Console.CursorX = 0;
                         Console.CursorY++;
                         Console.TryScroll();
                         Console.LastInput = returnValue;
-                        switch (returnValue)
-                        {
-                            case "clear": Console.Clear(); break;
-                            default: Console.WriteLine("Command not found."); break;
-                        }
-                        //Shell.Run(returnValue, Console);
-                        Console.Font = Font.Fallback;
+                        string returnstring = Kernel.commandManager.ProcessInput(returnValue);
+                        Console.WriteLine(returnstring);
                         DrawPrompt();
 
                         startX = Console.CursorX;
@@ -57,16 +55,16 @@ namespace BootNET.GUI
                             {
                                 if (Console.CursorX == 0)
                                 {
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, System.Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                    Console.Contents.DrawFilledRectangle(16 / 2 * Console.CursorX, 16 * Console.CursorY, System.Convert.ToUInt16(16 / 2), 16, 0, Console.BackgroundColor);
                                     Console.CursorY--;
-                                    Console.CursorX = width / (Console.Font.Size / 2) - 1;
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, System.Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                    Console.CursorX = width / (16 / 2) - 1;
+                                    Console.Contents.DrawFilledRectangle(16 / 2 * Console.CursorX, 16 * Console.CursorY, System.Convert.ToUInt16(16 / 2), 16, 0, Console.BackgroundColor);
                                 }
                                 else
                                 {
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, System.Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                    Console.Contents.DrawFilledRectangle(16 / 2 * Console.CursorX, 16 * Console.CursorY, System.Convert.ToUInt16(16 / 2), 16, 0, Console.BackgroundColor);
                                     Console.CursorX--;
-                                    Console.Contents.DrawFilledRectangle(Console.Font.Size / 2 * Console.CursorX, Console.Font.Size * Console.CursorY, System.Convert.ToUInt16(Console.Font.Size / 2), Console.Font.Size, 0, Console.BackgroundColor);
+                                    Console.Contents.DrawFilledRectangle(16 / 2 * Console.CursorX, 16 * Console.CursorY, System.Convert.ToUInt16(16 / 2), 16, 0, Console.BackgroundColor);
                                 }
 
                                 returnValue = returnValue.Remove(returnValue.Length - 1); // Remove the last character of the string
@@ -97,7 +95,7 @@ namespace BootNET.GUI
                     default:
                         if (KeyboardManager.ControlPressed)
                         {
-                            if (key.Key == ConsoleKeyEx.L)
+                            if (keyEvent.Key == ConsoleKeyEx.L)
                             {
                                 Console.Clear();
                                 returnValue = string.Empty;
@@ -106,9 +104,9 @@ namespace BootNET.GUI
                         }
                         else
                         {
-                            Console.Write(key.KeyChar.ToString());
+                            Console.Write(keyEvent.KeyChar.ToString());
                             Console.TryScroll();
-                            returnValue += key.KeyChar;
+                            returnValue += keyEvent.KeyChar;
                         }
 
                         Console.ForceDrawCursor();
@@ -123,10 +121,6 @@ namespace BootNET.GUI
         public void TerminalUpdate()
         {
             Kernel.Screen.DrawImage(x,y,Console.Contents, false);
-        }
-        public void HandleKey(KeyEvent key)
-        {
-            KeyBuffer.Enqueue(key);
         }
     }
 }

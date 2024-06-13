@@ -29,12 +29,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Resources\ArialCustomCharset16.btf" />
       <None Remove="Resources\Mouse.bmp" />
       <None Remove="Resources\program.bmp" />
       <None Remove="Resources\terminal.bmp" />
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="Resources\ArialCustomCharset16.btf" />
       <EmbeddedResource Include="Resources\Mouse.bmp" />
       <EmbeddedResource Include="Resources\program.bmp" />
       <EmbeddedResource Include="Resources\terminal.bmp" />
@@ -45,6 +47,10 @@
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Shell\" />
     </ItemGroup>
 
 

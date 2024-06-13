@@ -18,7 +18,7 @@ class Dock
     {
         Width = (ushort)(Desktop.apps.Count * Desktop.programlogo.Width + Desktop.apps.Count * Devide);
         Kernel.Screen.DrawFilledRectangle(0, 0, Desktop.ScreenWidth, 20, 0, Desktop.avgCol);
-        Kernel.Screen.DrawString(strX, strY, text, Font.Fallback, Color.White);
+        Kernel.Screen.DrawString(strX, strY, text, Kernel.DefaultFont, Color.White);
         if (MouseManager.MouseState == MouseState.Left)
         {
             if (MouseManager.X > strX && MouseManager.X < strX + (text.Length * 8) && MouseManager.Y > strY && MouseManager.Y < strY + 16)

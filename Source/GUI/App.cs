@@ -32,15 +32,15 @@ public class App
 
     public App(Canvas Icon, ushort width, ushort height, int x = 0, int y = 0)
     {
-        this._width = width;
-        this._height = height;
-        this._x = x;
-        this._y = y;
+        _width = width;
+        _height = height;
+        _x = x;
+        _y = y;
 
         this.x = x + 2;
         this.y = y + 22;
-        this.width = System.Convert.ToUInt16(width - 6);
-        this.height = System.Convert.ToUInt16(height - 24);
+        this.width = System.Convert.ToUInt16(width - 4);
+        this.height = System.Convert.ToUInt16(height - 22);
         this.Icon = Icon;
     }
 
@@ -54,7 +54,7 @@ public class App
         if (MouseManager.X > dockX && MouseManager.X < dockX + dockWidth && MouseManager.Y > dockY && MouseManager.Y < dockY + dockHeight)
         {
             namex = dockX - (name.Length * 8 / 2) + dockWidth / 2;
-            Kernel.Screen.DrawString((int)namex, dockY - 20, name, Font.Fallback, Color.White);
+            Kernel.Screen.DrawString((int)namex, dockY - 20, name, Kernel.DefaultFont, Color.White);
         }
 
         if (MouseManager.MouseState == MouseState.Left && _i == 0)
@@ -93,7 +93,7 @@ public class App
         Kernel.Screen.DrawFilledRectangle(_x, _y, _width, _height, 0, Color.DeepGray);
         Kernel.Screen.DrawRectangle(_x, _y, _width, _height, 0, Desktop.avgCol);
 
-        Kernel.Screen.DrawString(_x + 2, _y + 2, name, Font.Fallback, Color.White);
+        Kernel.Screen.DrawString(_x + 2, _y + 2, name, Kernel.DefaultFont, Color.White);
         AppUpdate();
 
     end:;

@@ -1,6 +1,8 @@
-﻿using BootNET.Graphics.Hardware;
+﻿using BootNET.Graphics.Fonts;
+using BootNET.Graphics.Hardware;
 using BootNET.GUI;
 using BootNET.Implementations.Filesystem;
+using BootNET.Shell;
 using Cosmos.Core;
 using Cosmos.System;
 
@@ -16,6 +18,9 @@ namespace BootNET.Core
         public static string CPU_CycleSpeed;
         public static string Total_RAM;
         public static string Display_Driver;
+        public static CommandManager commandManager = new();
+        public static string CurrentPath = "0:\\";
+        public static Font DefaultFont = new(Resources.rawFont,16);
         #endregion
         #region Drivers
         public static Display Screen;
