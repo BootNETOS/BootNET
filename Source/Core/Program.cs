@@ -1,7 +1,6 @@
 ﻿using BootNET.Graphics.Fonts;
 using BootNET.Graphics.Hardware;
 using BootNET.GUI;
-using BootNET.Implementations.Filesystem;
 using BootNET.Shell;
 using Cosmos.Core;
 using Cosmos.System;
