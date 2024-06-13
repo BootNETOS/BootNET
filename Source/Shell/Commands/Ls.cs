@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BootNET.GUI;
+using BootNET.Implementations.SVGAIITerminal;
+using System;
 using System.IO;
 using Kernel = BootNET.Core.Program;
 
@@ -13,25 +15,26 @@ namespace BootNET.Shell.Commands
             {
                 var files = Directory.GetFiles(Kernel.CurrentPath);
                 var directories = Directory.GetDirectories(Kernel.CurrentPath);
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("Files:");
-                Console.ForegroundColor = ConsoleColor.White;
-                foreach (var file in files)
-                {
-                    Console.WriteLine(file);
-                }
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("Directories: ");
-                Console.ForegroundColor = ConsoleColor.White;
+                Desktop.terminal.Console.WriteLine();
+                Desktop.terminal.Console.ForegroundColor = SVGAIIColor.Magenta;
+                Desktop.terminal.Console.WriteLine("Directories: ");
+                Desktop.terminal.Console.ForegroundColor = SVGAIIColor.White;
                 foreach (var directory in directories)
                 {
-                    Console.WriteLine(directory);
+                    Desktop.terminal.Console.WriteLine(directory);
                 }
+                Desktop.terminal.Console.ForegroundColor = SVGAIIColor.Magenta;
+                Desktop.terminal.Console.WriteLine("Files:");
+                Desktop.terminal.Console.ForegroundColor = SVGAIIColor.White;
+                foreach (var file in files)
+                {
+                    Desktop.terminal.Console.WriteLine(file);
+                }
+                
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Desktop.terminal.Console.WriteLine("Error: " + ex.Message);
             }
             return "";
         }
