@@ -1,11 +1,6 @@
-﻿using BootNET.Core;
-using BootNET.Graphics;
-using BootNET.Graphics.Fonts;
+﻿using BootNET.Graphics;
 using BootNET.Implementations.SVGAIITerminal;
 using Cosmos.System;
-using Microsoft.VisualBasic;
-using System.Collections.Generic;
-using System.IO;
 using Kernel = BootNET.Core.Program;
 
 namespace BootNET.GUI
@@ -19,7 +14,7 @@ namespace BootNET.GUI
         public Terminal(ushort width, ushort height, int x, int y) : base(Image.FromBitmap(Core.Resources.rawTerminal), width, height, x, y)
         {
             name = "Terminal";
-            Console = new(width-2, height-22, TerminalUpdate);
+            Console = new(width - 2, height - 22, TerminalUpdate);
             Console.WriteLine("Welcome to " + Kernel.OS_Name + " Version " + Kernel.OS_Version);
             Console.WriteLine();
             DrawPrompt();
@@ -120,7 +115,7 @@ namespace BootNET.GUI
         }
         public void TerminalUpdate()
         {
-            Kernel.Screen.DrawImage(x,y,Console.Contents, false);
+            Kernel.Screen.DrawImage(x, y, Console.Contents, false);
         }
     }
 }

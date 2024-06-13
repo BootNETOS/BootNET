@@ -1,6 +1,4 @@
 ﻿using BootNET.GUI;
-using BootNET.Implementations.SVGAIITerminal;
-using System;
 
 namespace BootNET.Shell.Commands
 {

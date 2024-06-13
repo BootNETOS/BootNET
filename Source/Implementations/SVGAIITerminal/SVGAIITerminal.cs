@@ -2,11 +2,10 @@
  * If a license wasn't included with the program,
  * refer to https://github.com/9xbt/SVGAIITerminal/blob/main/LICENSE.md */
 
-using System;
-using Cosmos.System;
 using BootNET.Graphics;
-using BootNET.Graphics.Fonts;
 using BootNET.GUI;
+using Cosmos.System;
+using System;
 namespace BootNET.Implementations.SVGAIITerminal;
 public class SVGAIITerminal
 {

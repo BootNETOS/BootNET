@@ -27,7 +27,7 @@ public static class Desktop
         avgCol = Color.UltraViolet;
         dock = new();
         apps.Add(new TestApp(700, 500, 30, 30));
-        terminal = new(700,500,30,30);
+        terminal = new(700, 500, 30, 30);
         apps.Add(terminal);
     }
     public static void Update()

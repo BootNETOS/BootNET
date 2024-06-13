@@ -1,5 +1,4 @@
 ﻿using BootNET.Graphics;
-using BootNET.Graphics.Fonts;
 using Cosmos.Core;
 using Cosmos.System;
 using Kernel = BootNET.Core.Program;
