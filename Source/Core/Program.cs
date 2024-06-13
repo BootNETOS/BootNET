@@ -5,6 +5,7 @@ using BootNET.Implementations.Filesystem;
 using BootNET.Shell;
 using Cosmos.Core;
 using Cosmos.System;
+using Cosmos.System.FileSystem;
 
 namespace BootNET.Core
 {
@@ -24,7 +25,7 @@ namespace BootNET.Core
         #endregion
         #region Drivers
         public static Display Screen;
-        public static NtfsCosmosVFS FileSystem;
+        public static CosmosVFS FileSystem;
         #endregion
         protected override void BeforeRun()
         {
