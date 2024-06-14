@@ -19,7 +19,7 @@ namespace BootNET.Core
         public static string Total_RAM;
         public static string Display_Driver;
         public static CommandManager commandManager = new();
-        public static string CurrentPath = "0:\\";
+        public static string CurrentPath = "1:\\";
         public static Font DefaultFont = new(Resources.rawFont, 16);
         #endregion
         #region Drivers
