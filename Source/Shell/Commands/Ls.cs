@@ -30,7 +30,7 @@ namespace BootNET.Shell.Commands
                 {
                     Desktop.terminal.Console.WriteLine(file);
                 }
-                
+
             }
             catch (Exception ex)
             {

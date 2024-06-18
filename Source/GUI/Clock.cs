@@ -1,11 +1,7 @@
-﻿using Kernel = BootNET.Core.Program;
-using BootNET.Graphics.Rasterizer;
+﻿using BootNET.Core;
 using BootNET.Graphics;
-using BootNET.GUI;
-using Cosmos.System;
 using System;
-using System.Xml.Linq;
-using BootNET.Core;
+using Kernel = BootNET.Core.Program;
 
 namespace BootNET.GUI
 {

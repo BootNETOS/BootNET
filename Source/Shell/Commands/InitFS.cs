@@ -1,9 +1,5 @@
 ﻿using Cosmos.System.FileSystem.VFS;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Kernel = BootNET.Core.Program;
 
 namespace BootNET.Shell.Commands
@@ -20,7 +16,7 @@ namespace BootNET.Shell.Commands
                 VFSManager.RegisterVFS(Kernel.FileSystem, false, false);
                 response = "Filesystem initalized sucessfully!";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response = "Error while initializing filesystem: " + ex.Message;
             }

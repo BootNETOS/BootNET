@@ -31,7 +31,8 @@ namespace BootNET.Shell
                 new Echo("echo"),
                 new Shutdown("shutdown"),
                 new Reboot("reboot"),
-                new Help("help")
+                new Help("help"),
+                new GetGpu("getgpu")
             };
         }
 

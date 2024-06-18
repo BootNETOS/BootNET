@@ -1,6 +1,5 @@
 ﻿using BootNET.Graphics.Fonts;
 using BootNET.Graphics.Hardware;
-using BootNET.Graphics.Hardware.Vesa;
 using BootNET.GUI;
 using BootNET.Shell;
 using Cosmos.Core;
@@ -29,7 +28,7 @@ namespace BootNET.Core
         #endregion
         protected override void BeforeRun()
         {
-            Screen = Display.GetDisplay(1280,720);
+            Screen = Display.GetDisplay(1280, 720);
             CPU_Vendor = CPU.GetCPUVendorName();
             CPU_Brand_String = CPU.GetCPUBrandString();
             CPU_CycleSpeed = CPU.GetCPUCycleSpeed().ToString();

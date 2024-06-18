@@ -25,6 +25,7 @@ public class App
     long namex;
 
     bool pressed;
+    public bool focused;
     public bool visible = false;
 
     public int _i = 0;
@@ -45,6 +46,14 @@ public class App
 
     public void Update()
     {
+        if(MouseManager.X >= _x & MouseManager.Y >= _y & MouseManager.X <= _x + _width & MouseManager.Y <= _y + _height)
+        {
+            focused = true;
+        }
+        else
+        {
+            focused = false;
+        }
         if (_i != 0)
         {
             _i--;
