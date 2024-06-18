@@ -2,6 +2,7 @@
 using Cosmos.Core.Memory;
 using Cosmos.System;
 using System.Collections.Generic;
+using BootNET.Core;
 using Kernel = BootNET.Core.Program;
 
 namespace BootNET.GUI;
@@ -27,6 +28,7 @@ public static class Desktop
         avgCol = Color.UltraViolet;
         dock = new();
         apps.Add(new TestApp(700, 500, 30, 30));
+        apps.Add(new Clock(200, 200, 400, 400));
         terminal = new(700, 500, 30, 30);
         apps.Add(terminal);
     }

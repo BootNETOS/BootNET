@@ -12,5 +12,7 @@ namespace BootNET.Core
         public static byte[] rawTerminal;
         [ManifestResourceStream(ResourceName = "BootNET.Resources.ArialCustomCharset16.btf")]
         public static byte[] rawFont;
+        [ManifestResourceStream(ResourceName = "BootNET.Resources.clock.bmp")]
+        public static byte[] rawClock;
     }
 }

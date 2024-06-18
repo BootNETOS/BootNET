@@ -13,7 +13,7 @@
         <StartCosmosGDB>False</StartCosmosGDB>
         <VisualStudioDebugPort>Pipe: Cosmos\Serial</VisualStudioDebugPort>
         <CosmosDebugPort>Serial: COM1</CosmosDebugPort>
-        <Launch>VMware</Launch>
+        <Launch>ISO</Launch>
         <Profile>VMware</Profile>
         <Description>Use VMware Player or Workstation to deploy and debug.</Description>
         <PxeInterface>192.168.0.8</PxeInterface>
@@ -30,6 +30,7 @@
 
     <ItemGroup>
       <None Remove="Resources\ArialCustomCharset16.btf" />
+      <None Remove="Resources\clock.bmp" />
       <None Remove="Resources\Mouse.bmp" />
       <None Remove="Resources\program.bmp" />
       <None Remove="Resources\terminal.bmp" />
@@ -37,6 +38,7 @@
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\ArialCustomCharset16.btf" />
+      <EmbeddedResource Include="Resources\clock.bmp" />
       <EmbeddedResource Include="Resources\Mouse.bmp" />
       <EmbeddedResource Include="Resources\program.bmp" />
       <EmbeddedResource Include="Resources\terminal.bmp" />
